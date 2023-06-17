@@ -1,0 +1,1 @@
+@extends('dash.list.index')
