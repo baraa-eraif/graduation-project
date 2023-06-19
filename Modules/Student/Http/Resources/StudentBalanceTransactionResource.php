@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Modules\Admin\Http\Resources;
+namespace Modules\Student\Http\Resources;
 
 use Modules\Base\Http\Resources\BaseResource;
 
-class StudentResource extends BaseResource
+class StudentBalanceTransactionResource extends BaseResource
 {
     /**
      * Transform the resource into an array.
@@ -17,11 +17,9 @@ class StudentResource extends BaseResource
     {
         return array(
             'id' => $this->id,
-            'student_id' => $this->student_id,
-            'email' => $this->email,
-            'name' => $this->name,
-            'specialization' => $this->specialization,
-            'balance' => $this->balance,
+            'student_name' => get($this->student_data,'name'),
+            'amount' => $this->amount,
+            'transaction_type_text' => trans("lang.$this->transaction_type"),
         );
     }
 

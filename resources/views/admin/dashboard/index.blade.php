@@ -160,14 +160,14 @@
                             <div class="row g-0 mb-7">
                                 <!--begin::Col-->
                                 <div class="col mx-5">
-                                    <div class="fs-6 text-gray-400">Avarage Sale</div>
-                                    <div class="fs-2 fw-bolder text-gray-800">$650</div>
+                                    <div class="fs-6 text-gray-400">عدد الطلاب</div>
+                                    <div class="fs-2 fw-bolder text-gray-800">{{$studentCount}}</div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col mx-5">
-                                    <div class="fs-6 text-gray-400">Comissions</div>
-                                    <div class="fs-2 fw-bolder text-gray-800">$29,500</div>
+                                    <div class="fs-6 text-gray-400">عدد المساقات</div>
+                                    <div class="fs-2 fw-bolder text-gray-800">{{$courseCount}}</div>
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -176,14 +176,14 @@
                             <div class="row g-0">
                                 <!--begin::Col-->
                                 <div class="col mx-5">
-                                    <div class="fs-6 text-gray-400">Revenue</div>
-                                    <div class="fs-2 fw-bolder text-gray-800">$55,000</div>
+                                    <div class="fs-6 text-gray-400">عدد افراد الهيئة التدريسة</div>
+                                    <div class="fs-2 fw-bolder text-gray-800">{{$teacherCount}}</div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col mx-5">
-                                    <div class="fs-6 text-gray-400">Expenses</div>
-                                    <div class="fs-2 fw-bolder text-gray-800">$1,130,600</div>
+                                    <div class="fs-6 text-gray-400">عدد التخصصات</div>
+                                    <div class="fs-2 fw-bolder text-gray-800">{{$specializationCount}}</div>
                                 </div>
                                 <!--end::Col-->
                             </div>

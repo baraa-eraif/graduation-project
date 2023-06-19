@@ -9,9 +9,9 @@ class Blog extends BaseModel
 {
     use HasFactory;
 
-    protected $fillable = array('title','content');
+    protected $fillable = array('title', 'content');
 
-protected $columns = array('title');
+    protected $columns = array('id','title');
 
     protected $inputs = array(
         [
@@ -27,14 +27,14 @@ protected $columns = array('title');
             'model' => 'content',
             'class' => 'col-md-12 mt-5',
         ],
-        [
-            'type' => 'image',
-            'message' => 'image',
-            'model' => 'title',
-            'class' => 'col-md-12',
-            'role' => [
-                'require' => true,
-            ]
-        ],
+//        [
+//            'type' => 'image',
+//            'message' => 'image',
+//            'model' => 'title',
+//            'class' => 'col-md-12',
+//            'role' => [
+//                'require' => true,
+//            ]
+//        ],
     );
 }

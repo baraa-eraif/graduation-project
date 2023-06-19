@@ -107,12 +107,12 @@
                             <!--end::Line-->
                         </div>
                         <!--end::Section-->
-
+@php $balance = get(auth()->user(),'balance',0);  @endphp
                         <!--begin::Badge-->
-                        <span class="badge badge-light-success fs-base">
+                        <span class="badge badge-light-{{$balance > 0 ? 'success' : 'danger'}} fs-base">
                             <i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1"><span class="path1"></span><span class="path2"></span></i>
 
-            {{get(auth()->user(),'balance',0)}}
+            {{$balance}}
         </span>
                         <!--end::Badge-->
                     </div>

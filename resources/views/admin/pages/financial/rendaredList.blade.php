@@ -6,13 +6,19 @@
              data-kt-search-element="customer">
             <!--begin::Avatar-->
             <div class="symbol symbol-35px symbol-circle me-5">
-                <img alt="Pic" src="{{asset('assets/media/avatars/300-6.jpg')}}"/>
+                <img alt="Pic" src="{{asset('assets/media/avatars/300-1.jpg')}}"/>
             </div>
             <!--end::Avatar-->
             <!--begin::Info-->
-            <div class="fw-bold">
-                <span class="fs-6 text-gray-800 me-2">{{get($student,'student_id')}}</span>
-                <span class="badge badge-light">{{get($student,'name')}}</span>
+            <div class="d-flex justify-content-around">
+                <div class="fw-bold">
+                    <span class="fs-6 text-gray-800 me-2">{{get($student,'student_id')}}</span>
+                    <span class="badge badge-light">{{get($student,'name')}}</span>
+                </div>
+                <div>
+                    <span class="fs-6 text-gray-800 me-2">الرصيد</span>
+                    <span class="badge badge-light">{{get($student,'balance')}}</span>
+                </div>
             </div>
             <!--end::Info-->
         </div>

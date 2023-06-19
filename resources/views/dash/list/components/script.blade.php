@@ -67,8 +67,9 @@
                     {
                         targets: columns_list.map(e => e.data).indexOf(<?php echo json_encode($value); ?>),
                         render: function (data, type, row) {
+
                             return `<div class="input-group input-group-sm w-50">
-                                <input id="{{"editable_$value"}}" type="text" maxlength="3" data-row="${row.id}" value="${data}" class="form-control " placeholder="{{$value}}" aria-label="{{$value}}" aria-describedby="basic-addon2"/>
+                                <input id="{{"editable_$value"}}"  ${row.enabled_accreditation ? '' : 'disabled'} type="text" maxlength="3" data-row="${row.id}" value="${data}" class="form-control " placeholder="{{$value}}" aria-label="{{$value}}" aria-describedby="basic-addon2"/>
 
                             </div>`;
                         }
@@ -118,9 +119,9 @@
                                         $slug = $action;
                                     }
                                 @endphp
-                                let slug = '{{$slug}}';
-                                let btnIsDisabled = (row[`enabled_${slug}`] ?? true) ? '' : 'disabled';
-                                html += `<button ${btnIsDisabled} data-kt-docs-table-{{$slug}}="{{$slug.'_row'}}" class="btn btn-sm btn-{{$class ?? 'primary'}}">{{trans("lang.$slug")}}</button>`
+                                let slug{{$key}} = '{{$slug}}';
+                                let btnIsDisabled{{$key}} = (row[`enabled_${slug{{$key}}}`] ?? true) ? '' : 'disabled';
+                                html += `<button ${btnIsDisabled{{$key}}} data-kt-docs-table-{{$slug}}="{{$slug.'_row'}}" class="btn btn-sm btn-{{$class ?? 'primary'}}">{{trans("lang.$slug")}}</button>`
                             @endforeach
                             @endif
                                 return html + ` @include('dash.list.actions')`;
@@ -328,6 +329,7 @@
             editButtons.forEach(d => {
                 d.addEventListener('click', function (e) {
                     e.preventDefault();
+                    
                     const parent = e.target.closest('tr');
                     const $_id = parent.querySelectorAll('td')[1].innerText;
                     var url = window.location.href + "/" + $_id + '/edit';

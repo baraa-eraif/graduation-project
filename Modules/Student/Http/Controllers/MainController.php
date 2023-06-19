@@ -6,9 +6,12 @@ use App\Models\Notification;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Base\Traits\CalendarDataSource;
 
 class MainController extends Controller
 {
+    use CalendarDataSource;
+
     /**
      * Display a listing of the resource.
      * @return Renderable

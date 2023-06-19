@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 use \Illuminate\Support\Facades\Route;
 
 Route::group(array('middleware' => ['auth:' . TEACHERS_GUARD]), function () {
@@ -18,7 +19,7 @@ Route::group(array('middleware' => ['auth:' . TEACHERS_GUARD]), function () {
     Route::get('course/{id}', 'CourseController@show')->name('course.show');
     Route::post('accreditation', 'CourseController@accreditation')->name('course.accreditation');
     Route::post('course/evaluation', 'CourseController@evaluation')->name('course.evaluation');
-    Route::get('calendar', 'MainController@calendar')->name('calendar.index');
+    Route::calendarRoutes();
 });
 
 Route::authRoutes();

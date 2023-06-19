@@ -60,4 +60,14 @@ trait CustomRoute
             return $this;
         });
     }
+
+    public function calendarRoutes()
+    {
+        Route::macro('calendarRoutes', function ($controller = 'MainController') {
+            Route::get('calendar/events', "$controller@events")->name('calendar.index');
+            Route::post('calendar/add-event', "$controller@addEvent")->name('calendar.event');
+            Route::post('calendar/delete-event/{id}', "$controller@deleteEvent");
+            return $this;
+        });
+    }
 }

@@ -124,8 +124,8 @@ License: For each use you must have a valid license purchased only from above li
                         <div class="text-center">
                             <!--begin::Submit button-->
                             <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
-                                <span class="indicator-label">Continue</span>
-                                <span class="indicator-progress">Please wait...
+                                <span class="indicator-label">تسجيل الدخول</span>
+                                <span class="indicator-progress">انتظر قليلاً...
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                             </button>
                             <!--end::Submit button-->
@@ -152,17 +152,6 @@ License: For each use you must have a valid license purchased only from above li
                 <!--end::Wrapper-->
             </div>
             <!--end::Content-->
-            <!--begin::Footer-->
-            <div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
-                <!--begin::Links-->
-                <div class="d-flex flex-center fw-bold fs-6">
-                    <a href="https://keenthemes.com" class="text-muted text-hover-primary px-2" target="_blank">About</a>
-                    <a href="https://devs.keenthemes.com" class="text-muted text-hover-primary px-2" target="_blank">Support</a>
-                    <a href="https://1.envato.market/EA4JP" class="text-muted text-hover-primary px-2" target="_blank">Purchase</a>
-                </div>
-                <!--end::Links-->
-            </div>
-            <!--end::Footer-->
         </div>
         <!--end::Body-->
     </div>
@@ -196,6 +185,11 @@ License: For each use you must have a valid license purchased only from above li
         @endforeach
     </script>
 @endif
+<script>
+    $('#kt_sign_in_submit').click(function () {
+        $(this).attr('data-kt-indicator', 'on');
+    })
+</script>
 <!--end::Javascript-->
 </body>
 <!--end::Body-->

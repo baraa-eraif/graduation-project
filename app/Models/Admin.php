@@ -9,7 +9,13 @@ class Admin extends BaseModel
 {
     use HasFactory;
 
-    protected $fillable = array('admin_id','email','password','info','name');
+    protected $fillable = array('admin_id', 'email', 'password', 'info', 'name');
 
     protected $casts = array('info' => 'array');
+
+    public function calendarEvents()
+    {
+        return $this->morphMany(CalendarEvent::class,'eventable');
+    }
+
 }

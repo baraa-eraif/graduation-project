@@ -21,6 +21,8 @@ Route::group(array('middleware' => ['auth:' . STUDENTS_GUARD]), function () {
     Route::get('course', 'CourseController@index')->name('course.index');
     Route::post('course', 'CourseController@enroll')->name('course.enroll');
     Route::get('student-grades', 'StudentCourseController@index')->name('student-grades.index');
+    Route::get('financial', 'StudentBalanceTransactionController@index')->name('financial.index');
+    Route::calendarRoutes();
 });
 
 Route::authRoutes();

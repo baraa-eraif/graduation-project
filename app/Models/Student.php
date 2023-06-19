@@ -34,6 +34,11 @@ class Student extends BaseModel
         return $this->hasMany(StudentCourse::class,'student_id');
     }
 
+    public function calendarEvents()
+    {
+        return $this->morphMany(CalendarEvent::class,'eventable');
+    }
+
     protected $inputs = array(
         [
             'type' => 'input',

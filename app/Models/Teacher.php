@@ -22,6 +22,11 @@ class Teacher extends BaseModel
         return $this->belongsToMany(Teacher::class, 'course_teachers', 'teacher_id', 'course_id', 'id', 'id');
     }
 
+    public function calendarEvents()
+    {
+        return $this->morphMany(CalendarEvent::class,'eventable');
+    }
+
 
     protected $inputs = array(
         [
@@ -45,15 +50,15 @@ class Teacher extends BaseModel
                 'require' => true,
             ]
         ],
-        [
-            'type' => 'select',
-            'model' => 'specializations',
-            'multiple' => true,
-            'endpoint' => [
-                'option_value' => 'id',
-                'option_name' => 'name',
-            ],
-        ],
+//        [
+//            'type' => 'select',
+//            'model' => 'specializations',
+//            'multiple' => true,
+//            'endpoint' => [
+//                'option_value' => 'id',
+//                'option_name' => 'name',
+//            ],
+//        ],
         [
             'type' => 'input',
             'model' => 'email',

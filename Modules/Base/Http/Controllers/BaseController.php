@@ -334,7 +334,7 @@ class BaseController extends Controller
                 ]);
                 if ($request->hasFile($key) && $request->file($key)->isValid()) {
                     $image = $request->file($key);
-                    $images[$key] = $image->store('seller', 'images');
+                    $images[$key] = $image->store('images');
                 }
             }
         }

@@ -33,6 +33,7 @@ Route::group(array('middleware' => ['auth:' . ADMINS_GUARD]), function () {
         Route::post('/add-amount', 'FinancialController@addAmount');
 
     });
+    Route::calendarRoutes();
 });
 
 Route::authRoutes();
