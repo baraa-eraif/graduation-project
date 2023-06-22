@@ -22,4 +22,4 @@ Route::group(array('middleware' => ['auth:' . TEACHERS_GUARD]), function () {
     Route::calendarRoutes();
 });
 
-Route::authRoutes();
+Route::authRoutes('teacher');

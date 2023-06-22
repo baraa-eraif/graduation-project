@@ -25,5 +25,5 @@ Route::group(array('middleware' => ['auth:' . STUDENTS_GUARD]), function () {
     Route::calendarRoutes();
 });
 
-Route::authRoutes();
+Route::authRoutes('student');
 

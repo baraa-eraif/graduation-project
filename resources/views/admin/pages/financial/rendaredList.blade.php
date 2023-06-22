@@ -1,7 +1,7 @@
 <div class="mh-300px scroll-y me-n5 pe-5">
     @forelse($students as $student)
         <!--begin::User-->
-        <div id="student-profile-link" data-student-id="{{get($student,'student_id')}}"
+        <div data-student-id="{{get($student,'student_id')}}"
              class="d-flex align-items-center p-3 rounded-3 border-hover border border-dashed border-gray-300 cursor-pointer mb-1"
              data-kt-search-element="customer">
             <!--begin::Avatar-->
@@ -10,17 +10,15 @@
             </div>
             <!--end::Avatar-->
             <!--begin::Info-->
-            <div class="d-flex justify-content-around">
-                <div class="fw-bold">
-                    <span class="fs-6 text-gray-800 me-2">{{get($student,'student_id')}}</span>
-                    <span class="badge badge-light">{{get($student,'name')}}</span>
-                </div>
-                <div>
-                    <span class="fs-6 text-gray-800 me-2">الرصيد</span>
-                    <span class="badge badge-light">{{get($student,'balance')}}</span>
-                </div>
+            <div class="fw-bold">
+                <span class="fs-6 text-gray-800 me-2">{{get($student,'student_id')}}</span>
+                <span class="badge badge-light">{{get($student,'name')}}</span>
             </div>
             <!--end::Info-->
+            <div class="d-flex justify-content-end">
+                 <button class="btn btn-danger" id="student-profile-link" data-student_id="{{ get($student,'student_id') }}">دفع</button>
+                 <button class="btn btn-primary" id="show-student-info" data-student_id="{{ get($student,'student_id') }}">تفاصيل</button>
+            </div>
         </div>
         <!--end::User-->
     @empty

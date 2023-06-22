@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::controller(\App\Http\Controllers\LandingPageController::class)->group(function () {
+    Route::get('/','index');
+    Route::get('/services-portal','servicesPortal')->name('services-portal');
 });

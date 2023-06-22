@@ -90,6 +90,11 @@
             <!--end::Search-->
         </div>
     </div>
+
+    <div id="student-info-div">
+
+    </div>
+
     @push('script')
         {{--        <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>--}}
         <script>
@@ -99,6 +104,7 @@
                 let clear = $('#clear');
                 let suggestions = $('#suggestions');
                 $("#search").keyup(function () {
+                    $('#student-info-div').html('');
                     let value = $(this).val(); // Get the search term from the input
                     if (value.length > 0) {
                         spinner.removeClass('d-none')
@@ -156,6 +162,14 @@
                             })
                         }
                     });
+                })
+
+
+                $(document).on('click','#show-student-info',function () {
+                    let student_id = $(this).data('student_id')
+                    ajax_request(`admin/student/financial/${student_id}`,{},function (response) {
+                        $('#student-info-div').html(response.view);
+                    },'get')
                 })
             });
             //

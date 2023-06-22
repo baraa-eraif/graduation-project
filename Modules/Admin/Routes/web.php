@@ -26,15 +26,19 @@ Route::group(array('middleware' => ['auth:' . ADMINS_GUARD]), function () {
     Route::get('enroll-course-request', 'EnrollCourseRequestController@index')->name('enroll-course-request.index');
     Route::post('enroll-course-request/accept', 'EnrollCourseRequestController@accept')->name('enroll-course-request.accept');
     Route::post('enroll-course-request/reject', 'EnrollCourseRequestController@reject')->name('enroll-course-request.reject');
+
+
+    Route::get('student/financial/{id}', 'StudentController@financialInfo');
+
+
     Route::group(array('prefix' => 'financial'), function () {
         Route::get('/student/{student_id}', 'FinancialController@studentProfile')->name('financial.profile');
         Route::get('/', 'FinancialController@view')->name('financial.index');
         Route::get('/search-student', 'FinancialController@searchStudent')->name('search.student');
         Route::post('/add-amount', 'FinancialController@addAmount');
-
     });
     Route::calendarRoutes();
 });
 
-Route::authRoutes();
+Route::authRoutes('admin');
 

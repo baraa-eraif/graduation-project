@@ -25,5 +25,12 @@ class StudentResource extends BaseResource
         );
     }
 
+    public function serializeForFinancialInfo($request)
+    {
+        return array_merge($this->toArray($request),array(
+            'balanceTransactions' => StudentBalanceTransactionResource::collection($this->balanceTransactions)
+
+        ));
+    }
 
 }

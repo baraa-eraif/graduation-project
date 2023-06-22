@@ -31,12 +31,18 @@ class Student extends BaseModel
 
     public function registrationCourses()
     {
-        return $this->hasMany(StudentCourse::class,'student_id');
+        return $this->hasMany(StudentCourse::class, 'student_id');
     }
 
     public function calendarEvents()
     {
-        return $this->morphMany(CalendarEvent::class,'eventable');
+        return $this->morphMany(CalendarEvent::class, 'eventable');
+    }
+
+
+    public function balanceTransactions()
+    {
+        return $this->hasMany(StudentBalanceTransaction::class,'student_id');
     }
 
     protected $inputs = array(
