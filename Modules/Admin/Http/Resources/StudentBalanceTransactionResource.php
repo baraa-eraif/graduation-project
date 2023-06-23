@@ -19,7 +19,7 @@ class StudentBalanceTransactionResource extends BaseResource
             'id' => $this->id,
             'amount' => $this->amount,
             'transaction_type' => $this->transaction_type,
-            'description' => $this->description,
+            'description' => trans("lang.$this->transaction_type"),
             'created_at' => $this->created_at,
         );
     }

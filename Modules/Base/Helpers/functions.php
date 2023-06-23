@@ -288,6 +288,8 @@ function pluckArrays(...$arrays)
 
 function formatDates($dates, $format = 'Y-m-d H:i')
 {
+    if (!$dates)
+        return $dates;
 //    return $dates;
     return Carbon::parse($dates)->format($format);
 }

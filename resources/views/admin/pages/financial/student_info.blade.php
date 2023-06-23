@@ -35,8 +35,8 @@
                                 @foreach($balanceTransactions as $balanceTransaction)
                                     <tr>
                                         <td><span class="badge badge-light-{{ in_array(get($balanceTransaction,'transaction_type'),\App\Http\Controllers\StudentWallet::CREDIT_TRANSACTIONS) ? 'danger' : 'success'  }}">{{get($balanceTransaction,'amount')}}</span></td>
-                                        <td>{{get($balanceTransaction,'created_at')}}</td>
-                                        <td  class="text-end">{{get($balanceTransaction,'description')}}</td>
+                                        <td>{{formatDates(get($balanceTransaction,'created_at'))}}</td>
+                                        <td  class="text-end">{{trans('lang.'.get($balanceTransaction,'transaction_type'))}}</td>
                                     </tr>
                                 @endforeach
                             @endif

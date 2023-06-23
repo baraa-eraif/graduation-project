@@ -128,7 +128,7 @@
 
 
                 $(document).on('click', '#student-profile-link', function (e) {
-                    let student_id = $(this).data('student-id');
+                    let student_id = $(this).data('student_id');
                     Swal.fire({
                         html: `<div class="mb-7"> ${student_id} اضافة رصيد للطالب صاحب الرفم الجامعي </div><div class="fw-bolder mb-5">الرجاء ادخال المبلغ المراد اضافته</div><input type="text" class="form-control" name="amount" />`,
                         icon: "info",
