@@ -9,12 +9,17 @@ class Teacher extends BaseModel
 {
     use HasFactory;
 
-    protected $fillable = array('teacher_id', 'email', 'password', 'info', 'name', 'specialization');
+    protected $fillable = array('teacher_id', 'email', 'password', 'info', 'name', 'specialization','profile_image');
 
     protected $casts = array('info' => 'array');
 
 
-    protected $columns = array('id','teacher_id', 'email',   'name', 'specialization');
+    protected $columns = array('id','image-holder' => 'profile_image','teacher_id', 'email',   'name', 'specialization');
+
+    public function getUserIdAttribute()
+    {
+        return $this->teacher_id;
+    }
 
 
     public function courses()
@@ -70,7 +75,15 @@ class Teacher extends BaseModel
             'type' => 'password',
             'model' => 'password',
         ],
-
+        [
+            'type' => 'image',
+            'message' => 'profile_image',
+            'model' => 'profile_image',
+            'class' => 'col-md-6',
+            'role' => [
+                'require' => true,
+            ]
+        ],
     );
 
 }

@@ -21,7 +21,9 @@ class StudentResource extends BaseResource
             'email' => $this->email,
             'name' => $this->name,
             'specialization' => $this->specialization,
+            'specialization_id' => $this->specialization_id,
             'balance' => $this->balance,
+            'profile_image' => image_url($this->profile_image),
         );
     }
 

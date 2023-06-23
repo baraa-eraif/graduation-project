@@ -13,9 +13,16 @@ class Admin extends BaseModel
 
     protected $casts = array('info' => 'array');
 
+
+    protected $appends = ['profile_image'];
+
     public function calendarEvents()
     {
-        return $this->morphMany(CalendarEvent::class,'eventable');
+        return $this->morphMany(CalendarEvent::class, 'eventable');
     }
 
+    public function getProfileImageAttribute()
+    {
+        return 'assets/media/avatars/blank.png';
+    }
 }

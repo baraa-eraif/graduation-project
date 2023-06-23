@@ -92,7 +92,7 @@ return array(
     'ordered' => 'الفصل الدراسي',
     'password' => 'كلمة المرور',
     'specializations' => 'التخصصات',
-    '' => '',
+    'profile_image' => 'الصورة الشخصية',
     '' => '',
     '' => '',
     '' => '',

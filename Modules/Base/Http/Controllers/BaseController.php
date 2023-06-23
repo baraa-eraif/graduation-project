@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Modules\Base\Http\Requests\BaseRequest;
 use Modules\Base\Http\Resources\BaseResource;
 use Modules\Base\Traits\getSupport;
@@ -195,9 +196,10 @@ class BaseController extends Controller
     {
         $data = $request->all();
 
-        if (count($this->imageUpload($request))) {
-            return array_merge($data, $this->imageUpload($request));
-        }
+        $images = $this->imageUpload($request);
+        if (count($images))
+            $data = array_merge($data,$images);
+
         if (isset($data['password']) && in_array('password', $this->model->getFillable()))
             $data['password'] = Hash::make($data['password']);
         else
@@ -205,6 +207,8 @@ class BaseController extends Controller
 
         return $data;
     }
+
+
 
     public function find($model)
     {
@@ -218,7 +222,7 @@ class BaseController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate((new $this->request)->rules(),(new $this->request)->messages());
+        $request->validate((new $this->request)->rules(), (new $this->request)->messages());
         try {
             $data = $this->getAttributes($request);
             $model = $this->getModel()->create($data);
@@ -334,10 +338,11 @@ class BaseController extends Controller
                 ]);
                 if ($request->hasFile($key) && $request->file($key)->isValid()) {
                     $image = $request->file($key);
-                    $images[$key] = $image->store('images');
+                    $images[$key] = Storage::disk('public')->put('image', $image);
                 }
             }
         }
+
         return $images;
     }
 

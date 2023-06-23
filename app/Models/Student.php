@@ -11,13 +11,18 @@ class Student extends BaseModel
 {
     use HasFactory;
 
-    protected $fillable = array('student_id', 'email', 'password', 'info', 'name', 'specialization_id', 'balance', 'gpa');
+    protected $fillable = array('student_id', 'email', 'password', 'info', 'name', 'specialization_id', 'balance', 'gpa', 'profile_image');
 
     protected $casts = array('info' => 'array');
 
 
-    protected $columns = array('id', 'student_id', 'email', 'name');
+    protected $columns = array('id', 'image-holder' => 'profile_image', 'student_id', 'email', 'name');
 
+
+    public function getUserIdAttribute()
+    {
+        return $this->student_id;
+    }
 
     public function specialization()
     {
@@ -42,7 +47,7 @@ class Student extends BaseModel
 
     public function balanceTransactions()
     {
-        return $this->hasMany(StudentBalanceTransaction::class,'student_id');
+        return $this->hasMany(StudentBalanceTransaction::class, 'student_id');
     }
 
     protected $inputs = array(
@@ -68,6 +73,9 @@ class Student extends BaseModel
                 'option_value' => 'id',
                 'option_name' => 'name',
             ],
+            'role' => [
+                'require' => true,
+            ]
         ],
         [
             'type' => 'input',
@@ -79,6 +87,13 @@ class Student extends BaseModel
         [
             'type' => 'password',
             'model' => 'password',
+        ],
+        [
+            'type' => 'image',
+            'message' => 'profile_image',
+            'model' => 'profile_image',
+            'class' => 'col-md-6',
+
         ],
     );
 }

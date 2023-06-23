@@ -255,7 +255,7 @@ function oldValue($name, $value)
 
 function getImage($image): string
 {
-    return $image ? asset('images/' . $image) : asset('assets/media/image.jpg');
+    return $image ? url('image/' . $image) : asset('app/assets/media/image.jpg');
 }
 
 function get_user_data($col)
@@ -311,7 +311,8 @@ function remove_string($search, $subject)
 
 function image_url($img, $size = '')
 {
-    return (!empty($size)) ? url('image/' . $size . '/' . $img) : url('image/' . $img);
+    return $img ? url($img) : null;
+//    return (!empty($size)) ? url('image/' . $size . '/' . $img) : url('image/' . $img);
 }
 
 function pluck_columns($column_model, $column_value = 'id', $column_title = 'name', $optional_collection = [])

@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('base')->group(function() {
-    Route::get('/', 'BaseController@index');
+Route::prefix('/image')->group(function () {
+    Route::get('/{id}', ['as' => 'image_get', 'uses' => 'ImageController@getDefaultImage']);
 });

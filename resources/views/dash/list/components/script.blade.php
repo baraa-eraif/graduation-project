@@ -57,7 +57,7 @@
                     {
                         targets: columns_list.map(e => e.data).indexOf(<?php echo json_encode($value); ?>),
                         render: function (data, type, row) {
-                            return `<img src="${data}" class="w-35px me-3" alt="{{asset('images/avatar.png')}}">`;
+                            return `<img src="${data}" class="btn-icon rounded position-relative w-auto h-50px w-md-40px h-md-40px" alt="{{asset('images/avatar.png')}}">`;
                         }
                     },
                         @break
@@ -314,7 +314,7 @@
             @endforeach
             @endif
 
-
+             let current_route = '{{current_route()}}';
             showButtons.forEach(d => {
                 d.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -329,7 +329,7 @@
             editButtons.forEach(d => {
                 d.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
+
                     const parent = e.target.closest('tr');
                     const $_id = parent.querySelectorAll('td')[1].innerText;
                     var url = window.location.href + "/" + $_id + '/edit';

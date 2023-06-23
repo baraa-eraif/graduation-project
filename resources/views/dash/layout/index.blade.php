@@ -175,13 +175,13 @@ License: For each use you must have a valid license purchased only from above li
                                     <div class="menu-content d-flex align-items-center px-3">
                                         <!--begin::Avatar-->
                                         <div class="symbol symbol-50px me-5">
-                                            <img alt="Logo" src="{{asset('assets/media/avatars/300-1.jpg')}}"/>
+                                            <img alt="{{asset('assets/media/avatars/300-1.jpg')}}" src="{{image_url(auth()->user()->profile_image ?? '')}}"/>
                                         </div>
                                         <!--end::Avatar-->
                                         <!--begin::Username-->
                                         <div class="d-flex flex-column">
                                             <div class="fw-bolder d-flex align-items-center fs-5">{{ auth()->user()->name ?? '' }}
-                                                <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span>
+                                                <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">{{ auth()->user()->user_id ?? '' }}</span>
                                             </div>
                                             <a href="#"
                                                class="fw-bold text-muted text-hover-primary fs-7">{{ auth()->user()->email ?? '' }}</a>
@@ -195,82 +195,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <div class="separator my-2"></div>
                                 <!--end::Menu separator-->
                                 <!--begin::Menu item-->
-                                <div class="menu-item px-5" data-kt-menu-trigger="hover"
-                                     data-kt-menu-placement="right-start">
-                                    <a href="#" class="menu-link px-5">
-												<span class="menu-title position-relative">Language
-												<span
-                                                    class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-												<img class="w-15px h-15px rounded-1 ms-2"
-                                                     src="{{asset('assets/media/flags/united-states.svg')}}"
-                                                     alt=""/></span></span>
-                                    </a>
-                                    <!--begin::Menu sub-->
-                                    <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#"
-                                               class="menu-link d-flex px-5 active">
-													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1"
-                                                             src="{{asset('assets/media/flags/united-states.svg')}}"
-                                                             alt=""/>
-													</span>English</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#"
-                                               class="menu-link d-flex px-5">
-													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1"
-                                                             src="{{asset('assets/media/flags/spain.svg')}}" alt=""/>
-													</span>Spanish</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#"
-                                               class="menu-link d-flex px-5">
-													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1"
-                                                             src="{{asset('assets/media/flags/germany.svg')}}" alt=""/>
-													</span>German</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#"
-                                               class="menu-link d-flex px-5">
-													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1"
-                                                             src="{{asset('assets/media/flags/japan.svg')}}" alt=""/>
-													</span>Japanese</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#"
-                                               class="menu-link d-flex px-5">
-													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1"
-                                                             src="{{asset('assets/media/flags/france.svg')}}" alt=""/>
-													</span>French</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu sub-->
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5 my-1">
-                                    <a href="#" class="menu-link px-5">Account
-                                        Settings</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
                                 <div class="menu-item px-5">
-                                    <a href="" id="logoutButton" class="menu-link px-5">Sign Out</a>
+                                    <a href="" id="logoutButton" class="menu-link px-5">تسجيل الخروج</a>
                                 </div>
                                 <!--end::Menu item-->
                             </div>
@@ -281,9 +207,10 @@ License: For each use you must have a valid license purchased only from above li
                         <!--begin::Chat-->
                         <div class="d-flex align-items-center ms-1 ms-lg-3">
                             <!--begin::Drawer wrapper-->
-                            <div class="btn btn-icon btn-danger position-relative w-30px h-30px w-md-40px h-md-40px"
-                                 id="kt_drawer_chat_toggle">3
-                            </div>
+                            <img alt="" class="btn-icon rounded position-relative w-30px h-30px w-md-40px h-md-40px" src="{{image_url(auth()->user()->profile_image ?? '')}}"/>
+{{--                            <div class="btn btn-icon btn-danger position-relative w-30px h-30px w-md-40px h-md-40px"--}}
+{{--                                 id="kt_drawer_chat_toggle">3--}}
+{{--                            </div>--}}
                             <!--end::Drawer wrapper-->
                         </div>
                         <!--end::Chat-->

@@ -20,7 +20,8 @@ class TeacherResource extends BaseResource
             'teacher_id' => $this->teacher_id,
             'email' => $this->email,
             'name' => $this->name,
-            'specialization' => $this->specialization
+            'specialization' => $this->specialization,
+            'profile_image' => image_url($this->profile_image),
         );
     }
 
