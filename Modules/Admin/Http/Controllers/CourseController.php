@@ -12,15 +12,15 @@ class CourseController extends BaseController
 {
 
     protected $config = [
-      'filter_inputs' => false
+      'filter_inputs' => false,
     ];
 
     public function store(Request $request)
     {
-        $semester = Semester::find($request->get('semester_id'));
-        $semester_course_hours = optional($semester->courses)->sum('hour_number') ?? 0;
-        if (($request->hour_number + $semester_course_hours) > $semester->number_of_hour)
-            return redirect()->back()->withErrors('لقد تجاوزت العدد المسموح به لساقات هذا الفصل');
+//        $semester = Semester::find($request->get('semester_id'));
+//        $semester_course_hours = optional($semester->courses)->sum('hour_number') ?? 0;
+//        if (($request->hour_number + $semester_course_hours) > $semester->number_of_hour)
+//            return redirect()->back()->withErrors('لقد تجاوزت العدد المسموح به لساقات هذا الفصل');
 
         if ($request->hour_number > 4)
             return redirect()->back()->withErrors('يجب ألا يتجاوز قيمة عدد الساعات عن 4 ساعات');

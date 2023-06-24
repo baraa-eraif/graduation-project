@@ -158,7 +158,8 @@ class BaseController extends Controller
     {
         if (request()->ajax()) {
             $query = $this->getQuery();
-            return response()->json(['data' => $this->resource::Collection($query->ordered()->get())->toArray(request()), 'recordsFiltered' => $query->paginate()->total(), 'recordsTotal' => $query->paginate(self::PAGINATE_PER_PAGE)->total() ?? 0], 200,);
+            return response()->json(['data' => $this->resource::Collection($query->ordered()->get())->toArray(request()),
+                'recordsFiltered' => $query->paginate()->total(), 'recordsTotal' => $query->paginate(self::PAGINATE_PER_PAGE)->total() ?? 0], 200,);
         }
         return view($this->viewIndex, $this->compact);
     }
@@ -208,13 +209,6 @@ class BaseController extends Controller
         return $data;
     }
 
-
-
-    public function find($model)
-    {
-        return $this->getModel()->findOrFail($model);
-    }
-
     /**
      * Store a newly created resource in storage.
      * @param Request $request
@@ -234,6 +228,11 @@ class BaseController extends Controller
             ->with('alert.success', __("lang.stored_successfully"));
     }
 
+
+    public function find($model)
+    {
+        return $this->getModel()->findOrFail($model);
+    }
     /**
      * Show the specified resource.
      * @param int $id
@@ -300,6 +299,13 @@ class BaseController extends Controller
         $this->destroy($request->get('group'));
     }
 
+    /**
+     * @param $model
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     * delete one recorde on database
+     */
     public function destroy($model)
     {
         if (!request()->get('is_trash')) {

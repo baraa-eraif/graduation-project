@@ -57,7 +57,7 @@ class CourseController extends BaseController
         $course = Course::find($request->get('id'));
         $hours_count = current_semester_hours_count(auth()->user());
         if (($hours_count + $course->hour_number) > current_semester()->number_of_hour)
-            return redirect()->back()->withErrors('لقد تجاوزت عدد الساعات المسموح بها للفصل الحالي');
+            return response()->json(array('status' => false, 'message' => 'لقد تجاوزت عدد الساعات المسموح بها للفصل الحالي'));
 
         $model = EnrollCourseRequest::create(array(
             'student_id' => auth()->id(),

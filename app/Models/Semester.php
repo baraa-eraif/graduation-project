@@ -87,6 +87,7 @@ class Semester extends BaseModel
                 'model' => [
                     'الاول' => 1,
                     'الثاني' => 2,
+                    'صيفي' => 3,
                 ]
             ],
         ],

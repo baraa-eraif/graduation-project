@@ -64,9 +64,9 @@ License: For each use you must have a valid license purchased only from above li
                             </button>
                             <!--end::Aside toggle-->
                             <!--begin::Header Logo-->
-                            <a href="../../demo18/dist/index.html">
-                                <img alt="Logo" src="{{asset('assets/media/logos/logo-2.svg')}}"
-                                     class="h-30px h-lg-35px"/>
+                            <a href="#">
+                                <img alt="Logo" src="{{asset('landing/assets/iugLogo.png')}}"
+                                     class="h-30px h-lg-50px"/>
                             </a>
                             <!--end::Header Logo-->
                         </div>

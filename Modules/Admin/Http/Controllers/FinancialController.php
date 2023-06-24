@@ -49,4 +49,5 @@ class FinancialController extends Controller
 
         return response()->json(array('status' => true, 'message' => ' الى رصيد الطلب ' . $amount . 'تم اضافة مبلغ '));
     }
+
 }

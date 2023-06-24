@@ -10,4 +10,9 @@ use Modules\Base\Http\Controllers\BaseController;
 class StudyPlanController extends BaseController
 {
 
+    protected $config = [
+        'deleteBtn' => false,
+    ];
+
+
 }

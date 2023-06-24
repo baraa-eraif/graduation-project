@@ -10,8 +10,17 @@ use Modules\Base\Http\Controllers\BaseController;
 
 class SemesterController extends BaseController
 {
+
+    protected $config = [
+        'deleteBtn' => false,
+    ];
+
     public function store(Request $request)
     {
+        $max_end_date = Semester::query()->max('end_date');
+        if ($request->start_date < $max_end_date || $request->start_date >= $request->end_date)
+            return redirect()->back()->withErrors('الرجاء التاكد من التواريخ المدرجة لهذا الفصل');
+
         $exists = Semester::query()->where(collect(request()->all())->only('study_plan_id', 'year', 'ordered')->toArray())->exists();
         if ($exists)
             return redirect()->back()->withErrors('الفصل المراد اضافته مضاف مسبقاً');

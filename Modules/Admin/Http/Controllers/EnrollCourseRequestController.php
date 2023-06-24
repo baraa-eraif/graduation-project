@@ -27,11 +27,22 @@ class EnrollCourseRequestController extends BaseController
         return $q->where('status', 'pending');
     }
 
+
+
     public function reject(Request $request)
     {
         $this->updateRequestStatus($request, 'rejected');
         return response()->json(array('status' => true, 'message' => 'تم تحديث حالة الطلب'));
     }
+
+    protected function updateRequestStatus($request, $status)
+    {
+        $model = EnrollCourseRequest::find($request->id);
+        $model->update(array('status' => $status));
+        return $model->refresh();
+    }
+
+
 
     public function accept(Request $request)
     {
@@ -70,10 +81,4 @@ class EnrollCourseRequestController extends BaseController
         return response()->json(array('status' => true, 'message' => 'تم تحديث حالة الطلب'));
     }
 
-    protected function updateRequestStatus($request, $status)
-    {
-        $model = EnrollCourseRequest::find($request->id);
-        $model->update(array('status' => $status));
-        return $model->refresh();
-    }
 }

@@ -17,9 +17,9 @@ class StudentCourseResource extends BaseResource
     {
         return array(
             'id' => $this->id,
-            'student_name' => get($this->student_data,'name'),
-            'course_name' => get($this->course_data,'name'),
-            'course_ident' => get($this->course_data,'course_ident'),
+            'student_name' => get($this->student,'name'),
+            'course_name' => get($this->course,'name'),
+            'course_ident' => get($this->course,'course_ident'),
             'midterm_grade' => $this->midterm_grade,
             'final_term_grade' => $this->final_term_grade,
             'activities_grades' => $this->activities_grades,

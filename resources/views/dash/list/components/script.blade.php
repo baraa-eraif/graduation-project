@@ -273,11 +273,23 @@
                                         id: $_id,
                                     },
                                     success: function (data) {
+                                        if (!data.status){
+                                            Swal.fire({
+                                                text: data.message,
+                                                icon: "error",
+                                                buttonsStyling: false,
+                                                confirmButtonText: "حسناً",
+                                                customClass: {
+                                                    confirmButton: "btn fw-bold btn-primary",
+                                                }
+                                            });
+                                            return;
+                                        }
                                         Swal.fire({
                                             text: "تم عملية التسجيل",
                                             icon: "success",
                                             buttonsStyling: false,
-                                            confirmButtonText: "Ok, got it!",
+                                            confirmButtonText: "حسناً",
                                             customClass: {
                                                 confirmButton: "btn fw-bold btn-primary",
                                             }
@@ -290,7 +302,7 @@
                                             text: "حدث خطا غير معروف",
                                             icon: "error",
                                             buttonsStyling: false,
-                                            confirmButtonText: "Ok, got it!",
+                                            confirmButtonText: "حسناً",
                                             customClass: {
                                                 confirmButton: "btn fw-bold btn-primary",
                                             }
@@ -389,7 +401,7 @@
                                     text: "You have deleted " + customerName,
                                     icon: "success",
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: "حسناً",
                                     customClass: {
                                         confirmButton: "btn fw-bold btn-primary",
                                     }
@@ -467,7 +479,7 @@
                                     text: "تم عملية الحذف",
                                     icon: "success",
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: "حسناً",
                                     customClass: {
                                         confirmButton: "btn fw-bold btn-primary",
                                     }

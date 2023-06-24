@@ -20,7 +20,9 @@ class CourseController extends BaseController
         'deleteAction' => false,
         'importBtn' => false,
         'trash' => false,
-        'showAction' => true
+        'showAction' => true,
+        'filter_inputs' => false,
+
     );
 
     protected $columns = array(
@@ -44,12 +46,14 @@ class CourseController extends BaseController
         $compact = get_data_table_source(
             $course,
             array('id', 'student_name', 'student_ident', 'midterm_grade', 'final_term_grade', 'activities_grades'),
-            array('config' => NO_ACTIONS_LIST, 'editable_input' => array('midterm_grade', 'final_term_grade', 'activities_grades'),
+            array('config' => array_merge(NO_ACTIONS_LIST,array('filter_inputs' => false,)), 'editable_input' => array('midterm_grade', 'final_term_grade', 'activities_grades'),
                 'appended_actions' => array('accreditation'))
         );
         return view($this->viewIndex, $compact, array(
             'endpoint' => current_route() . '?model=' . $model,));
     }
+
+
 
     public function evaluation(Request $request)
     {
@@ -74,6 +78,8 @@ class CourseController extends BaseController
         Student::find($student_id)->update(array('gpa' => $gpa));
         return response()->json(array('status' => true, 'message' => __("lang.updated_successfully")));
     }
+
+
 
 
     public function accreditation(Request $request)

@@ -27,4 +27,7 @@ class StudentController extends BaseController
         $view = view('admin.pages.financial.student_info',$student)->render();
         return response()->json(array('status' => true,'view' => $view));
     }
+
+
+
 }

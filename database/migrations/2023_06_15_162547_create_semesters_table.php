@@ -19,7 +19,7 @@ class CreateSemestersTable extends Migration
             $table->integer('number_of_hour');
             $table->unsignedInteger('study_plan_id');
             $table->enum('year',array(1,2));
-            $table->enum('ordered',array(1,2))->comment('study_season');
+            $table->enum('ordered',array(1,2,3))->comment('study_season');
             $table->timestamp('end_date');
             $table->timestamp('start_date');
             $table->softDeletes();
