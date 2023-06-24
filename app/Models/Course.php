@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Request;
 
 class Course extends BaseModel
 {
@@ -46,7 +47,7 @@ class Course extends BaseModel
             'class' => 'col-md-6',
             'role' => [
                 'require' => true,
-            ]
+            ],
         ],
         [
             'type' => 'input',
@@ -116,6 +117,8 @@ class Course extends BaseModel
             'model' => 'hour_number',
             'role' => [
                 'require' => true,
+                'integer' => true,
+                'lessThan' => '4',
             ]
         ],
 //        [
@@ -128,4 +131,29 @@ class Course extends BaseModel
 //            ],
 //        ],
     );
+
+
+    protected $filterInputs = array(
+        [
+            'type' => 'select',
+            'model' => 'registration_status',
+            'class' => 'col-md-6',
+            'hideSearch' => true,
+            'endpoint' => [
+                'option_value' => 'id',
+                'option_name' => 'name',
+                'model' => [
+                    'مسجلة' => 'accepted',
+                    'مرفوضة' => 'rejected',
+                    'قيد الانتظار' => 'pending',
+                ]
+            ],
+        ],
+    );
+
+    public function scopeSearch($query, Request $request)
+    {
+        return $query;
+    }
+
 }

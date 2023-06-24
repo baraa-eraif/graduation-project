@@ -385,3 +385,27 @@ function getGradePoints($grade)
         return 0.0;
     }
 }
+
+
+function send_notification_for_models($text, $model)
+{
+    if ($model) {
+        \App\Models\Notification::create(array(
+            'sourceable_id' => get($model, 'id'),
+            'sourceable_model' => get_class($model),
+            'text' => $text
+        ));
+    }
+}
+
+function current_semester()
+{
+    return \App\Models\Semester::where('start_date', '<', now())->where('end_date', '>', now())->first();
+}
+
+function current_semester_hours_count($student)
+{
+    if (!$student)
+        return null;
+        return $student->registrationCourses()->where('status', 'passed')->sum('course_data->hour_number') ?? 0;
+}

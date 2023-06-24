@@ -16,7 +16,7 @@ class Specialization extends BaseModel
 
     protected $columns = array('id', 'name', 'number_of_hour');
 
-    protected $showAction = true;
+//    protected $showAction = true;
 
     protected $inputs = array(
         [

@@ -52,15 +52,28 @@
             {
                 fields: {
                     @foreach($inputs as $input)
-                        @if(isset($input['role']['require']))
                         {{$input['model']}}: {
                         validators: {
+                            @if(isset($input['role']['require']))
                             notEmpty: {
                                 message: 'هذا الحقل مطلوب'
-                            }
+                            },
+                            @endif
+                                @if(isset($input['role']['integer']))
+                            integer: {
+                                message: 'يجب أن يكون قيمة صحيحة'
+                            },
+                            @endif
+{{--                                @if(isset($input['role']['lessThan']))--}}
+{{--                            lessThan: {--}}
+{{--                                value: {{$input['role']['lessThan']}},--}}
+{{--                                inclusive: true,--}}
+{{--                                message: ' يجب ألا يتجاوز القيمة {{$input['role']['lessThan']}} '--}}
+{{--                            },--}}
+{{--                            @endif--}}
+
                         }
                     },
-                    @endif
                     @endforeach
                 },
 
@@ -119,9 +132,9 @@
         $("#{{$input['model']}}").hide();
         $('#{{$input['show']['standOnOtherInput']}}').on('change', function () {
             var array$ = <?php echo json_encode(array_values($input['show']['values'])) ?>;
-            if(array$.includes($(this).find(":selected").val())){
+            if (array$.includes($(this).find(":selected").val())) {
                 $("#{{$input['model']}}").show();
-            }else {
+            } else {
                 $("#{{$input['model']}}").hide();
             }
         });

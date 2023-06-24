@@ -39,6 +39,9 @@ class EnrollCourseRequestController extends BaseController
         try {
         $model = $this->updateRequestStatus($request, 'accepted');
         $specialization = Specialization::find(get($model, 'student_data.specialization_id'));
+        $student = $model->student;
+        if (!$student)
+            return redirect()->back()->withErrors('الطالب غير مسجل');
 
         $course = StudentCourse::updateOrCreate(array(
             'student_id' => $model->student_id,
@@ -57,6 +60,10 @@ class EnrollCourseRequestController extends BaseController
             ->execute();
 
         DB::commit();
+            $course_name = get($model,'course.course_ident');
+            send_notification_for_models(trans('lang.accept_enroll_request_message',array('course_name' => $course_name)), $student);
+            $passed_hours = $student->registrationCourses()->where('status','passed')->sum('course_data->hour_number');
+            $student->update(array('enrolled_hours' => $passed_hours));
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors($exception->getMessage());
         }

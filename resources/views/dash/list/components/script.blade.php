@@ -91,6 +91,10 @@
                                     btnClass = 'warning';
                                     btnIsDisabled = 'disabled';
                                     break;
+                                case 'accepted':
+                                    btnClass = 'primary';
+                                    btnIsDisabled = 'disabled';
+                                    break;
                                 case 'rejected':
                                     btnClass = 'danger';
                                     btnIsDisabled = 'disabled';
@@ -196,7 +200,7 @@
         //             }
         //         });
         //
-        //         // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
+        //         // Filter datatable --- official docs reference: https://datatables.net/reference/api/searc23.h()
         //         dt.search(paymentValue).draw();
         //     }) : null;
         // }

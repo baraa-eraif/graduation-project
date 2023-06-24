@@ -37,4 +37,12 @@ class Blog extends BaseModel
 //            ]
 //        ],
     );
+
+    protected $filterInputs = array(
+        [
+            'type' => 'input',
+            'model' => 'title',
+            'class' => 'col-md-6',
+        ],
+    );
 }

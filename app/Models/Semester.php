@@ -41,6 +41,8 @@ class Semester extends BaseModel
             'model' => 'number_of_hour',
             'role' => [
                 'require' => true,
+                'integer' => true,
+                'lessThan' => 18,
             ]
         ],
         [
@@ -59,7 +61,9 @@ class Semester extends BaseModel
             'model' => 'year',
             'class' => 'col-md-6',
             'hideSearch' => true,
-
+            'role' => [
+                'require' => true,
+            ],
             'endpoint' => [
                 'option_value' => 'id',
                 'option_name' => 'name',
@@ -74,7 +78,9 @@ class Semester extends BaseModel
             'model' => 'ordered',
             'class' => 'col-md-6',
             'hideSearch' => true,
-
+            'role' => [
+                'require' => true,
+            ],
             'endpoint' => [
                 'option_value' => 'id',
                 'option_name' => 'name',
@@ -88,7 +94,11 @@ class Semester extends BaseModel
 
     public function study_plan()
     {
-        return $this->belongsTo(StudyPlan::class,'study_plan_id');
+        return $this->belongsTo(StudyPlan::class, 'study_plan_id');
     }
 
+    public function courses()
+    {
+        return $this->hasMany(Course::class,'semester_id');
+    }
 }

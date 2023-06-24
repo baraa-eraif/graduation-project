@@ -11,7 +11,7 @@ class Student extends BaseModel
 {
     use HasFactory;
 
-    protected $fillable = array('student_id', 'email', 'password', 'info', 'name', 'specialization_id', 'balance', 'gpa', 'profile_image');
+    protected $fillable = array('student_id', 'email', 'password', 'info', 'name', 'specialization_id', 'balance', 'gpa', 'profile_image','passed_hours','enrolled_hours');
 
     protected $casts = array('info' => 'array');
 
