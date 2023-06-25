@@ -24,7 +24,7 @@ License: For each use you must have a valid license purchased only from above li
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Keenthemes | Metronic" />
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="shortcut icon" href="{{asset('assets/media/logos/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{asset('landing/assets/iugLogo.png')}}" />
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -54,16 +54,16 @@ License: For each use you must have a valid license purchased only from above li
                 <!--begin::Content-->
                 <div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-20">
                     <!--begin::Logo-->
-                    <a href="../../demo18/dist/index.html" class="py-9 mb-5">
-                        <img alt="Logo" src="{{asset('assets/media/logos/logo-2.svg')}}" class="h-60px" />
+                    <a href="#" class="py-9 mb-5">
+                        <img alt="Logo" src="{{asset('landing/assets/iugLogo.png')}}" class="h-150px" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Title-->
                     <h1 class="fw-bolder fs-2qx pb-5 pb-md-10" style="color: #986923;">بوابة المدرس</h1>
                     <!--end::Title-->
                     <!--begin::Description-->
-                    <p class="fw-bold fs-2" style="color: #986923;">Discover Amazing Metronic
-                        <br />with great build tools</p>
+                    <p class="fw-bold fs-2" style="color: #986923;">الجامعة الإسلامية -غزة - فلسطين
+                        <br />معهد التنمية المجتمعية الجامعة الاسلامية-غزة</p>
                     <!--end::Description-->
                 </div>
                 <!--end::Content-->

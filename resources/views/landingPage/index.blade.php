@@ -589,7 +589,7 @@
             </div>
         </div>
     </div>
-</div>  End blog -->
+</div>
 <div class="text-center">
     <div class="badge badge-subhead wow fadeInUp" id="ads">الأخبار والاعلانات</div>
 </div>
