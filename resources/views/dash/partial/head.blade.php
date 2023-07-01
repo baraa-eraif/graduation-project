@@ -33,6 +33,7 @@
         * {
             font-family: 'Cairo';
         }
+
     </style>
     @stack('style')
 </head>

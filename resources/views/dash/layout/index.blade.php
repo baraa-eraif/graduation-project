@@ -10,7 +10,7 @@ Dribbble: www.dribbble.com/keenthemes
 Like: www.facebook.com/keenthemes
 License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
 -->
-<html lang="en">
+<html lang="ar" dir="rtl">
 <!--begin::Head-->
 <head>
     <base href="">
@@ -40,7 +40,7 @@ License: For each use you must have a valid license purchased only from above li
         <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
             <!--begin::Header-->
             <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header"
-                 data-kt-sticky-animation="false" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+                 data-kt-sticky-animation="true" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
                 <!--begin::Container-->
                 <div class="container-xxl d-flex align-items-center flex-lg-stack">
                     <!--begin::Brand-->
@@ -49,7 +49,7 @@ License: For each use you must have a valid license purchased only from above li
                         <div class="flex-grow-1">
                             <!--begin::Aside toggle-->
                             <button
-                                class="btn btn-icon btn-color-gray-800 btn-active-color-primary aside-toggle justify-content-start w-30px w-lg-40px"
+                                class="btn btn-icon btn-active-color-primary"
                                 id="kt_aside_toggle">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen059.svg')}}-->
                                 <span class="svg-icon svg-icon-2">
