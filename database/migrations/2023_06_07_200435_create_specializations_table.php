@@ -16,7 +16,7 @@ class CreateSpecializationsTable extends Migration
         Schema::create('specializations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedInteger('plan_id');
+            $table->unsignedInteger('plan_id')->nullable();
             $table->unsignedInteger('number_of_hour');
             $table->json('other_details')->nullable();
             $table->softDeletes();

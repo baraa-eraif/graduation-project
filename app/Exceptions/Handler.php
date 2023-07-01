@@ -33,7 +33,6 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (\Throwable $e) {
-//            abort(redirect()->route('server_error',['errors' =>$e->getMessage()]));
             dd($e);
         });
     }

@@ -6,7 +6,7 @@
              data-kt-search-element="customer">
             <!--begin::Avatar-->
             <div class="symbol symbol-35px symbol-circle me-5">
-                <img alt="Pic" src="{{asset('assets/media/avatars/300-1.jpg')}}"/>
+                <img alt="Pic" src="{{asset(get($student,'profile_image','assets/media/avatars/300-1.jpg'))}}"/>
             </div>
             <!--end::Avatar-->
             <!--begin::Info-->

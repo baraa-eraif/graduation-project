@@ -24,7 +24,7 @@ class Teacher extends BaseModel
 
     public function courses()
     {
-        return $this->belongsToMany(Teacher::class, 'course_teachers', 'teacher_id', 'course_id', 'id', 'id');
+        return $this->belongsToMany(Course::class, 'course_teachers', 'teacher_id', 'course_id', 'id', 'id');
     }
 
     public function calendarEvents()

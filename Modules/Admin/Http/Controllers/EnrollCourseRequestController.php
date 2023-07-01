@@ -28,7 +28,6 @@ class EnrollCourseRequestController extends BaseController
     }
 
 
-
     public function reject(Request $request)
     {
         $this->updateRequestStatus($request, 'rejected');
@@ -43,38 +42,39 @@ class EnrollCourseRequestController extends BaseController
     }
 
 
-
     public function accept(Request $request)
     {
         DB::beginTransaction();
         try {
-        $model = $this->updateRequestStatus($request, 'accepted');
-        $specialization = Specialization::find(get($model, 'student_data.specialization_id'));
-        $student = $model->student;
-        if (!$student)
-            return redirect()->back()->withErrors('الطالب غير مسجل');
+            $model = $this->updateRequestStatus($request, 'accepted');
+            $specialization = Specialization::find(get($model, 'student_data.specialization_id'));
+            $student = $model->student;
+            if (!$student)
+                return redirect()->back()->withErrors('الطالب غير مسجل');
 
-        $course = StudentCourse::updateOrCreate(array(
-            'student_id' => $model->student_id,
-            'course_id' => $model->course_id,
-        ), array(
-            'student_id' => $model->student_id,
-            'course_id' => $model->course_id,
-            'course_data' => $model->course_data,
-            'student_data' => $model->student_data,
-        ));
+            $course = StudentCourse::updateOrCreate(array(
+                'student_id' => $model->student_id,
+                'course_id' => $model->course_id,
+            ), array(
+                'student_id' => $model->student_id,
+                'course_id' => $model->course_id,
+                'course_data' => $model->course_data,
+                'student_data' => $model->student_data,
+            ));
 
-        (new StudentWallet())->setAmount(get($specialization,'hour_price',0))
-            ->setStudentModel($model->student)
-            ->setSourceModel(StudentCourse::class)->setSourceId($course->id)
-            ->setTransactionType(StudentWallet::REGISTRATION_COURSE_TRANSACTION_TYPE)
-            ->execute();
+            (new StudentWallet())->setAmount(get($specialization, 'hour_price', 0))
+                ->setStudentModel($model->student)
+                ->setSourceModel(StudentCourse::class)->setSourceId($course->id)
+                ->setTransactionType(StudentWallet::REGISTRATION_COURSE_TRANSACTION_TYPE)
+                ->execute();
 
-        DB::commit();
-            $course_name = get($model,'course.course_ident');
-            send_notification_for_models(trans('lang.accept_enroll_request_message',array('course_name' => $course_name)), $student);
-            $passed_hours = $student->registrationCourses()->where('status','passed')->sum('course_data->hour_number');
+            $passed_hours = $student->registrationCourses()->where('status', 'passed')->sum('course_data->hour_number');
             $student->update(array('enrolled_hours' => $passed_hours));
+
+            DB::commit();
+            $course_name = get($model, 'course_data.course_ident');
+            send_notification_for_models(trans('lang.accept_enroll_request_message', array('course_name' => $course_name)), $student);
+
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors($exception->getMessage());
         }

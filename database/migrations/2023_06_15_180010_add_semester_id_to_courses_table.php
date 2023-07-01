@@ -14,7 +14,7 @@ class AddSemesterIdToCoursesTable extends Migration
     public function up()
     {
         Schema::table('courses', function (Blueprint $table) {
-            $table->unsignedInteger('semester_id');
+            $table->unsignedInteger('semester_id')->nullable();
         });
     }
 

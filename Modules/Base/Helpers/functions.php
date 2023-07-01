@@ -176,7 +176,7 @@ function activeGuard()
 
 function moduleTitle()
 {
-    return Str::before(current_route(), '.') . '_dashboard';
+    return current_route() ? Str::before(current_route(), '.') . '_dashboard' : 'root_title';
 }
 
 function supportModel($model, $model_name)
@@ -194,7 +194,7 @@ function routeContain($model)
 function current_route()
 {
     $route = explode('.', Route::currentRouteName());
-    return "$route[0].$route[1]";
+    return isset($route[0],$route[1]) ? "$route[0].$route[1]" : null;
 }
 
 function model_name($model)

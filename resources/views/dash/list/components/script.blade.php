@@ -112,20 +112,24 @@
                         render: function (data, type, row) {
                             let html = '';
                             @if($appended_actions)
-                                @foreach($appended_actions as $key => $action)
-                                @php
-                                    $slug = null;
-                                    $class = null;
-                                    if (is_array($action)){
-                                        $slug = get($action,'model',$key);
-                                        $class=  get($action,'class','primary');
-                                    }else {
-                                        $slug = $action;
-                                    }
-                                @endphp
-                                let slug{{$key}} = '{{$slug}}';
-                                let btnIsDisabled{{$key}} = (row[`enabled_${slug{{$key}}}`] ?? true) ? '' : 'disabled';
-                                html += `<button ${btnIsDisabled{{$key}}} data-kt-docs-table-{{$slug}}="{{$slug.'_row'}}" class="btn btn-sm btn-{{$class ?? 'primary'}}">{{trans("lang.$slug")}}</button>`
+                            @foreach($appended_actions as $key => $action)
+                            @if($action == 'appointment')
+                                 html += ` @include('components.appointment')`;
+                            @else
+                            @php
+                                $slug = null;
+                                $class = null;
+                                if (is_array($action)){
+                                    $slug = get($action,'model',$key);
+                                    $class=  get($action,'class','primary');
+                                }else {
+                                    $slug = $action;
+                                }
+                            @endphp
+                            let slug{{$key}} = '{{$slug}}';
+                            let btnIsDisabled{{$key}} = (row[`enabled_${slug{{$key}}}`] ?? true) ? '' : 'disabled';
+                            html += `<button ${btnIsDisabled{{$key}}} data-kt-docs-table-{{$slug}}="{{$slug.'_row'}}" class="btn btn-sm btn-{{$class ?? 'primary'}}">{{trans("lang.$slug")}}</button>`
+                            @endif
                             @endforeach
                             @endif
                                 return html + ` @include('dash.list.actions')`;
@@ -215,6 +219,7 @@
 
             @if($appended_actions)
             @foreach($appended_actions as $key => $action)
+            @if($action != 'appointment')
             @php
                 $slug = null;
                    $class = null;
@@ -273,7 +278,7 @@
                                         id: $_id,
                                     },
                                     success: function (data) {
-                                        if (!data.status){
+                                        if (!data.status) {
                                             Swal.fire({
                                                 text: data.message,
                                                 icon: "error",
@@ -327,10 +332,11 @@
 
                 })
             });
+            @endif
             @endforeach
             @endif
 
-             let current_route = '{{current_route()}}';
+            let current_route = '{{current_route()}}';
             showButtons.forEach(d => {
                 d.addEventListener('click', function (e) {
                     e.preventDefault();

@@ -31,6 +31,11 @@ class CourseController extends BaseController
     public $viewShow = 'teacher.pages.course.show';
 
 
+    public function getQuery()
+    {
+        return auth()->user()->courses();
+    }
+
     public function show($model)
     {
         $course = Course::find(request()->get('model', $model));
@@ -46,13 +51,12 @@ class CourseController extends BaseController
         $compact = get_data_table_source(
             $course,
             array('id', 'student_name', 'student_ident', 'midterm_grade', 'final_term_grade', 'activities_grades'),
-            array('config' => array_merge(NO_ACTIONS_LIST,array('filter_inputs' => false,)), 'editable_input' => array('midterm_grade', 'final_term_grade', 'activities_grades'),
+            array('config' => array_merge(NO_ACTIONS_LIST, array('filter_inputs' => false,)), 'editable_input' => array('midterm_grade', 'final_term_grade', 'activities_grades'),
                 'appended_actions' => array('accreditation'))
         );
         return view($this->viewIndex, $compact, array(
             'endpoint' => current_route() . '?model=' . $model,));
     }
-
 
 
     public function evaluation(Request $request)
@@ -80,14 +84,12 @@ class CourseController extends BaseController
     }
 
 
-
-
     public function accreditation(Request $request)
     {
         $model = StudentCourse::find($request->get('id'));
-        $course_name = get($model,'course.course_ident');
+        $course_name = get($model, 'course.course_ident');
         $grade = min($model->activities_grades + $model->final_term_grade + $model->midterm_grade, 100);
-        send_notification_for_models(trans('lang.accreditation_message',array('course_name' => $course_name,'grade' => $grade)), $model->student ?? null);
+        send_notification_for_models(trans('lang.accreditation_message', array('course_name' => $course_name, 'grade' => $grade)), $model->student ?? null);
         $status = $grade > 60 ? 'passed' : 'fail';
         $model->update(array('status' => $status));
         return response()->json(array('status' => true, 'message' => __("lang.updated_successfully")));

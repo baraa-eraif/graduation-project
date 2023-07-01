@@ -40,6 +40,12 @@ class Course extends BaseModel
         return $this->hasOne(EnrollCourseRequest::class,'course_id')->where('student_id',auth()->id());
     }
 
+    public function teachers()
+    {
+        return $this->belongsToMany(Course::class, 'course_teachers', 'course_id', 'teacher_id', 'id', 'id');
+    }
+
+
     protected $inputs = array(
         [
             'type' => 'input',
@@ -121,15 +127,15 @@ class Course extends BaseModel
                 'lessThan' => '4',
             ]
         ],
-//        [
-//            'type' => 'select',
-//            'model' => 'specializations',
-//            'multiple' => true,
-//            'endpoint' => [
-//                'option_value' => 'id',
-//                'option_name' => 'name',
-//            ],
-//        ],
+        [
+            'type' => 'select',
+            'model' => 'teachers',
+            'multiple' => true,
+            'endpoint' => [
+                'option_value' => 'id',
+                'option_name' => 'name',
+            ],
+        ],
     );
 
 
