@@ -15,6 +15,6 @@ class StudentBalanceTransaction extends BaseModel
 
     protected $casts = array('student_data' => 'array');
 
-
-    protected $columns = array('id','amount','transaction_type_text','student_name');
+//student_name
+    protected $columns = array('id','status-label'=>'amount','transaction_type_text');
 }

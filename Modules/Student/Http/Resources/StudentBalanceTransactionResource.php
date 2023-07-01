@@ -18,7 +18,10 @@ class StudentBalanceTransactionResource extends BaseResource
         return array(
             'id' => $this->id,
             'student_name' => get($this->student_data,'name'),
-            'amount' => $this->amount,
+            'amount' => array(
+                'value' => $this->amount,
+                'class' => $this->transaction_type == 'cash_deposit' ? 'success' : 'danger'
+            ),
             'transaction_type_text' => trans("lang.$this->transaction_type"),
         );
     }
