@@ -14,6 +14,8 @@
             <div class="card-body">
                 <p id="statistics"></p>
                 <!--begin::Wrapper-->
+                <h2 style="font-weight: bold"> عرض {{  trans('lang.'.current_route()) }}  </h2>
+
                 <!--begin::Wrapper-->
                 {{--                <input type="text" id="search" data-kt-docs-table-filter="search" value=""--}}
                 {{--                                       class="form-control w-250px" placeholder="أدخل للبحث"/>--}}

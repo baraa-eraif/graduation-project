@@ -31,7 +31,7 @@
         </div>
         <!--end::Image input-->
         <!--begin::Hint-->
-        <div class="form-text"> {{$input['message']}}  png، jpg، jpeg.<span>: أنواع الملفات المسموح بها </span></div>
+        <div class="form-text">  png، jpg، jpeg.<span>  : أنواع الملفات المسموح بها </span></div>
         <!--end::Hint-->
     </div>
     <!--end::Col-->

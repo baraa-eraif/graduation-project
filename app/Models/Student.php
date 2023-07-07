@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Tymon\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Foundation\Auth\User as AuthenticatableUser;
 
 class Student extends BaseModel
 {
     use HasFactory;
 
-    protected $fillable = array('student_id', 'email', 'password', 'info', 'name', 'specialization_id', 'balance', 'gpa', 'profile_image','passed_hours','enrolled_hours');
+    protected $fillable = array(
+        'first_name','father_name','grandfather_name','family_name','date_of_birth','phone','high_school_gpa',
+        'address','gender','national_id','nationality','student_id', 'email', 'password', 'info','specialization_id', 'balance', 'gpa',
+        'profile_image','passed_hours','enrolled_hours'
+    );
 
     protected $casts = array('info' => 'array');
 
@@ -53,7 +54,56 @@ class Student extends BaseModel
     protected $inputs = array(
         [
             'type' => 'input',
-            'model' => 'name',
+            'model' => 'first_name',
+            'role' => [
+                'require' => true,
+            ]
+        ],
+        [
+            'type' => 'input',
+            'model' => 'father_name',
+            'role' => [
+                'require' => true,
+            ]
+        ],
+        [
+            'type' => 'input',
+            'model' => 'grandfather_name',
+            'role' => [
+                'require' => true,
+            ]
+        ],
+        [
+            'type' => 'input',
+            'model' => 'family_name',
+            'role' => [
+                'require' => true,
+            ]
+        ],
+        [
+            'type' => 'date',
+            'model' => 'date_of_birth',
+            'role' => [
+                'require' => true,
+            ]
+        ],
+        [
+            'type' => 'input',
+            'model' => 'phone',
+            'role' => [
+                'require' => true,
+            ]
+        ],
+        [
+            'type' => 'input',
+            'model' => 'email',
+            'role' => [
+                'require' => true,
+            ]
+        ],
+        [
+            'type' => 'input',
+            'model' => 'nationality',
             'role' => [
                 'require' => true,
             ]
@@ -78,13 +128,6 @@ class Student extends BaseModel
             ]
         ],
         [
-            'type' => 'input',
-            'model' => 'email',
-            'role' => [
-                'require' => true,
-            ]
-        ],
-        [
             'type' => 'password',
             'model' => 'password',
         ],
@@ -93,7 +136,44 @@ class Student extends BaseModel
             'message' => 'profile_image',
             'model' => 'profile_image',
             'class' => 'col-md-6',
+        ],
+        [
+            'type' => 'input',
+            'model' => 'high_school_gpa',
+            'role' => [
+                'require' => true,
+            ],
 
+        ],
+        [
+            'type' => 'input',
+            'model' => 'address',
+            'role' => [
+                'require' => true,
+            ]
+        ],
+        [
+            'type' => 'select',
+            'model' => 'gender',
+            'hideSearch' => true,
+            'role' => [
+                'require' => true,
+            ],
+            'endpoint' => [
+                'option_value' => 'id',
+                'option_name' => 'name',
+                'model' => [
+                    'ذكر' => 'male',
+                    'انثى' => 'female',
+                ]
+            ],
+        ],
+        [
+            'type' => 'input',
+            'model' => 'national_id',
+            'role' => [
+                'require' => true,
+            ]
         ],
     );
 }

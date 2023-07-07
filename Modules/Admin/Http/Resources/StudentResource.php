@@ -24,13 +24,24 @@ class StudentResource extends BaseResource
             'specialization_id' => $this->specialization_id,
             'balance' => $this->balance,
             'profile_image' => image_url($this->profile_image),
+            'first_name' => $this->first_name,
+            'father_name' => $this->father_name,
+            'grandfather_name' => $this->grandfather_name,
+            'family_name' => $this->family_name,
+            'date_of_birth' => $this->date_of_birth,
+            'phone' => $this->phone,
+            'high_school_gpa' => $this->high_school_gpa,
+            'address' => $this->address,
+            'gender' => $this->gender,
+            'national_id' => $this->national_id,
+            'nationality' => $this->nationality,
         );
     }
 
     public function serializeForFinancialInfo($request)
     {
-        return array_merge($this->toArray($request),array(
-            'balanceTransactions' => StudentBalanceTransactionResource::collection($this->balanceTransactions)
+        return array_merge($this->toArray($request), array(
+            'balanceTransactions' => StudentBalanceTransactionResource::collection($this->balanceTransactions),
 
         ));
     }

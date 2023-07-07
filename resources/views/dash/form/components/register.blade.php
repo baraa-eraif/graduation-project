@@ -1,3 +1,4 @@
+@isset($input['model'],$input['type'])
 @php
     $placeholder = trans('lang.'.(!isset($is_search) ? null : 'search_select_') .$input['model']);
 @endphp
@@ -41,3 +42,4 @@
         @include('dash.form.components.checkBoxGroup')
         @break
 @endswitch
+@endisset

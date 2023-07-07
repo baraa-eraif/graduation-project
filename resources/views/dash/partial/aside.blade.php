@@ -1,6 +1,6 @@
 <div id="kt_aside" class="aside px-5" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="true"
      data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '285px'}"
-     data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_aside_toggle">
+     data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggle">
     <!--begin::Aside menu-->
     <div class="aside-menu flex-column-fluid">
         <!--begin::Aside Menu-->
@@ -10,7 +10,7 @@
             <!--begin::Menu-->
             <div class="menu menu-rounded menu-column menu-gray-600 menu-state-bg fw-semibold w-250px" data-kt-menu="true">
                 <!--begin::Menu item-->
-                <div class="menu-item" data-kt-menu-trigger="hover" data-kt-menu-placement="right-end">
+                <div class="menu-item" data-kt-menu-trigger="hover" data-kt-menu-placement="right-start">
 
                 @foreach(genrate_menu_item() as $item)
                     <div class="menu-item">
