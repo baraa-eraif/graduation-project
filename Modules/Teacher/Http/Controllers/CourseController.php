@@ -79,7 +79,9 @@ class CourseController extends BaseController
             $totalGradePoints += $grade * $creditHours;
         }
         $gpa = $totalGradePoints / $totalCreditHours;
-        Student::find($student_id)->update(array('gpa' => $gpa));
+        Student::find($student_id)->update(array(
+            'gpa' => $gpa,
+        ));
         return response()->json(array('status' => true, 'message' => __("lang.updated_successfully")));
     }
 
@@ -87,7 +89,7 @@ class CourseController extends BaseController
     public function accreditation(Request $request)
     {
         $model = StudentCourse::find($request->get('id'));
-        $course_name = get($model, 'course.course_ident');
+        $course_name = get($model, 'course.name');
         $grade = min($model->activities_grades + $model->final_term_grade + $model->midterm_grade, 100);
         send_notification_for_models(trans('lang.accreditation_message', array('course_name' => $course_name, 'grade' => $grade)), $model->student ?? null);
         $status = $grade > 60 ? 'passed' : 'fail';

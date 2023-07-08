@@ -14,7 +14,7 @@ class Specialization extends BaseModel
 
     protected $casts = array('other_details' => 'array');
 
-    protected $columns = array('id', 'name', 'number_of_hour');
+    protected $columns = array('id', 'name', 'number_of_hour','hour_price');
 
 //    protected $showAction = true;
 
@@ -29,6 +29,13 @@ class Specialization extends BaseModel
         [
             'type' => 'input',
             'model' => 'number_of_hour',
+            'role' => [
+                'require' => true,
+            ]
+        ],
+        [
+            'type' => 'input',
+            'model' => 'hour_price',
             'role' => [
                 'require' => true,
             ]

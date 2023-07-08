@@ -47,7 +47,10 @@ class FinancialController extends Controller
             ->setTransactionType(StudentWallet::CASH_DEPOSIT_TRANSACTION_TYPE)
             ->execute();
 
-        return response()->json(array('status' => true, 'message' => ' الى رصيد الطلب ' . $amount . 'تم اضافة مبلغ '));
+        $student = (new StudentResource($student))->serializeForFinancialInfo(\request());
+        $view = view('admin.pages.financial.student_info',$student)->render();
+
+        return response()->json(array('status' => true, 'message' => ' الى رصيد الطلب ' . $amount . 'تم اضافة مبلغ ','view' => $view));
     }
 
 }

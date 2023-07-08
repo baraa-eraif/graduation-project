@@ -15,8 +15,8 @@
                 <span class="badge badge-light">{{get($student,'name')}}</span>
             </div>
             <!--end::Info-->
-            <div class="d-flex justify-content-end">
-                 <button class="btn btn-danger" id="student-profile-link" data-student_id="{{ get($student,'student_id') }}">دفع</button>
+            <div class="d-flex justify-content-end  ms-auto">
+                 <button class="btn btn-danger mx-2" id="student-profile-link" data-student_id="{{ get($student,'student_id') }}">دفع</button>
                  <button class="btn btn-primary" id="show-student-info" data-student_id="{{ get($student,'student_id') }}">تفاصيل</button>
             </div>
         </div>

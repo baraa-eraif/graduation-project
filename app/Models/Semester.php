@@ -10,9 +10,9 @@ class Semester extends BaseModel
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = array('title', 'number_of_hour', 'study_plan_id', 'year', 'ordered', 'start_date', 'end_date');
+    protected $fillable = array('title', 'number_of_hour', 'study_plan_id',  'ordered', 'start_date', 'end_date', 'status');
 
-    protected $columns = array('id', 'title', 'number_of_hour', 'start_date', 'end_date');
+    protected $columns = array('id' => 'id', 'title' => 'title','status' => 'status-label', 'number_of_hour' => 'editable_input', 'start_date' => 'editable_input', 'end_date' => 'editable_input');
 
     protected $inputs = array(
         [
@@ -100,6 +100,6 @@ class Semester extends BaseModel
 
     public function courses()
     {
-        return $this->hasMany(Course::class,'semester_id');
+        return $this->hasMany(Course::class, 'semester_id');
     }
 }

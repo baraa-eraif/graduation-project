@@ -19,6 +19,8 @@ Route::group(array('middleware' => ['auth:' . TEACHERS_GUARD]), function () {
     Route::get('course/{id}', 'CourseController@show')->name('course.show');
     Route::post('accreditation', 'CourseController@accreditation')->name('course.accreditation');
     Route::post('course/evaluation', 'CourseController@evaluation')->name('course.evaluation');
+    Route::get('reset-password', 'ResetPasswordController@resetPasswordView')->name('reset-password.index');
+    Route::post('reset-password', 'ResetPasswordController@reset')->name('reset-password');
     Route::calendarRoutes();
 });
 

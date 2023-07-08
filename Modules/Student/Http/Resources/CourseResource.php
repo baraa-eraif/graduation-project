@@ -29,7 +29,9 @@ class CourseResource extends BaseResource
             'semester_name' => optional($this->semester)->title,
             'status' => optional($studentRequest)->status,
             'status_text' => optional($studentRequest)->status ? trans("lang.".optional($studentRequest)->status.'_status') : null,
-            'enabled_enroll' => optional($studentRequest)->status == 'rejected'
+            'enabled_enroll' => optional($studentRequest)->status == 'rejected',
+            'teachers' => $this->teachers,
+            'selected_teacher' => get($this->studentRequest,'teacher_id')
         );
     }
 

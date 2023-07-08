@@ -20,6 +20,7 @@ class SpecializationResource extends BaseResource
             'name' => $this->name,
             'plan_id' => $this->plan_id,
             'number_of_hour' => $this->number_of_hour,
+            'hour_price' => $this->hour_price,
         );
     }
 

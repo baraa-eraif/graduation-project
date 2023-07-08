@@ -61,6 +61,21 @@
                         }
                     },
                         @break
+                        @case('editable-select')
+                    {
+                        targets: columns_list.map(e => e.data).indexOf(<?php echo json_encode($value); ?>),
+                        render: function (data, type, row) {
+                            let options = '';
+                            $.each(row.teachers ?? [], function(index, object) {
+                                options += `<option value="${object.id}" ${row.selected_teacher === object.id ? 'selected' : ''}>${object.name}</option>`
+                            });
+                            return `<select class="form-select form-select-solid"  ${row.selected_teacher ? 'disabled' : ''} id="select-${row.id}" data-control="select2" data-dropdown-parent="#kt_modal_1" data-placeholder="اختر" data-allow-clear="true">
+                                        <option value="{{null}}">{{trans('lang.select_one')}}</option>
+                                        ${options}
+                                    </select>`;
+                        }
+                    },
+                        @break
                         @endswitch
                         @endif
                         @if(isset($editable_input) && @is_array($editable_input) && in_array($value,$editable_input))
@@ -86,6 +101,13 @@
                             let btn_text = row?.status_text ?? 'التسجيل';
                             let btnClass = 'primary';
                             let btnIsDisabled = '';
+
+                            let teachers = {};
+                            $.each(row.teachers ?? [], function(index, object) {
+                                teachers['name'] = object.name;
+                                teachers['id'] = object.id;
+                            });
+                            teachers =  Object.values(teachers)
                             switch (row.status) {
                                 case 'pending':
                                     btnClass = 'warning';
@@ -100,7 +122,7 @@
                                     btnIsDisabled = 'disabled';
                                     break;
                             }
-                            return `<button data-kt-docs-table-enroll="enroll_row" ${btnIsDisabled} class="btn btn-sm btn-${btnClass}">${btn_text}</button>`;
+                            return `<button data-teachers="${teachers}"  data-kt-docs-table-enroll="enroll_row" ${btnIsDisabled} class="btn btn-sm btn-${btnClass}">${btn_text}</button>`;
                         },
                     },
                         @else
@@ -112,9 +134,9 @@
                         render: function (data, type, row) {
                             let html = '';
                             @if($appended_actions)
-                            @foreach($appended_actions as $key => $action)
-                            @if($action == 'appointment')
-                                 html += ` @include('components.appointment')`;
+                                @foreach($appended_actions as $key => $action)
+                                @if($action == 'appointment')
+                                html += ` @include('components.appointment')`;
                             @else
                             @php
                                 $slug = null;
@@ -124,11 +146,13 @@
                                     $class=  get($action,'class','primary');
                                 }else {
                                     $slug = $action;
+                                    $class= 'success';
                                 }
                             @endphp
+
                             let slug{{$key}} = '{{$slug}}';
                             let btnIsDisabled{{$key}} = (row[`enabled_${slug{{$key}}}`] ?? true) ? '' : 'disabled';
-                            html += `<button ${btnIsDisabled{{$key}}} data-kt-docs-table-{{$slug}}="{{$slug.'_row'}}" class="btn btn-sm btn-{{$class ?? 'primary'}}">{{trans("lang.$slug")}}</button>`
+                            html += `<button ${btnIsDisabled{{$key}}} data-kt-docs-table-{{$slug}}="{{$slug.'_row'}}" class="mx-1 btn btn-sm btn-light-{{$class ?? 'primary'}}">{{trans("lang.$slug")}}</button>`
                             @endif
                             @endforeach
                             @endif
@@ -238,7 +262,16 @@
                     e.preventDefault();
                     const parent = e.target.closest('tr');
                     const $_id = parent.querySelectorAll('td')[0].innerText;
-                    console.log('enrollButtons', $_id)
+                    let action = '{{$slug}}';
+                    let html = '';
+                    let data = $(this).data('teachers');
+                    let teachers = data ? data.split(' ') : null;
+                    console.log('teachers',teachers)
+                    let appended = {};
+                    if (action === 'enroll'){
+                        appended['selected_teacher'] = $(`#select-${$_id}`).val()
+                    }
+                    console.log('appendedappended', appended,)
 
                     // Select parent row
                     // Get customer name
@@ -247,7 +280,6 @@
                     function evaluationCourse() {
                         console.log('evaluationCourse', $_id)
                     }
-
                     @else
                     Swal.fire({
                         text: '{{trans("lang.message_$slug")}}',
@@ -276,6 +308,7 @@
                                     data: {
                                         "_token": "{{ csrf_token() }}",
                                         id: $_id,
+                                        ...appended
                                     },
                                     success: function (data) {
                                         if (!data.status) {

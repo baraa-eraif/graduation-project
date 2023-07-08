@@ -20,6 +20,8 @@ class SemesterResource extends BaseResource
             'title' => $this->title,
             'ordered' => $this->ordered,
             'year' => $this->year,
+            'status' => trans("lang.$this->status"),
+            'status_class' => $this->status == 'pending' ? 'danger' : 'success',
             'study_plan_id' => $this->study_plan_id,
             'number_of_hour' => $this->number_of_hour,
             'start_date' => formatDates($this->start_date,'Y-m-d'),

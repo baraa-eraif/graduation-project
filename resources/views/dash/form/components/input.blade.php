@@ -1,5 +1,6 @@
 @php
  $span = get($input,'span');
+$modelValue = $span ? remove_string($span,${$input['model']} ?? null ) : ${$input['model']} ?? null;
 @endphp
 <div class="{{$span ? 'input-group' : 'form-floating'}}">
     @if($span)
@@ -11,7 +12,7 @@
             {{$value['name']}} = {{$value['callable']}}();
         @endforeach
     @endisset
-    class="form-control {{$input['model'] }}" id="floatingInput" value="{{ ${$input['model']} ?? null }}"
+    class="form-control {{$input['model'] }}" id="floatingInput" value="{{ $modelValue }}"
     name="{{ $input['model'] }}" @if(arrayGet($input,'role.require')) required @endif
     placeholder="{{$placeholder}}"/>
         @if(!$span)

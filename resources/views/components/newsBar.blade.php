@@ -37,7 +37,7 @@
 @endpush
 @props(array('notifications' => null))
 @if($notifications)
-    <div id="news-bar">
+    <div id="news-bar" style="direction: rtl">
         <ul>
             @foreach($notifications as $notification)
                 <li><a href="#" style="font-size: 20px;">{{$notification}}</a></li>

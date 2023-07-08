@@ -11,7 +11,7 @@ class Course extends BaseModel
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = array('course_ident', 'name', 'hour_number', 'other_details', 'study_year', 'study_season', 'course_type', 'semester_id');
+    protected $fillable = array('course_ident', 'name', 'hour_number', 'other_details', 'semester_id');
 
     protected $columns = array('id', 'course_ident', 'name', 'hour_number', 'semester_name');
 
@@ -42,7 +42,7 @@ class Course extends BaseModel
 
     public function teachers()
     {
-        return $this->belongsToMany(Course::class, 'course_teachers', 'course_id', 'teacher_id', 'id', 'id');
+        return $this->belongsToMany(Teacher::class, 'course_teachers', 'course_id', 'teacher_id', 'id', 'id');
     }
 
 

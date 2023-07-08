@@ -9,7 +9,7 @@ class EnrollCourseRequest extends BaseModel
 {
     use HasFactory;
 
-    protected $fillable = array('status', 'course_data', 'student_data', 'course_id', 'student_id');
+    protected $fillable = array('status', 'course_data', 'student_data', 'course_id', 'student_id','teacher_id');
 
     protected $columns = array('id', 'course_name', 'student_name');
 
@@ -19,4 +19,10 @@ class EnrollCourseRequest extends BaseModel
     {
         return $this->belongsTo(Student::class,'student_id');
     }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class,'course_id');
+    }
+
 }

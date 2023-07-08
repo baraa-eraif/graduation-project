@@ -158,7 +158,7 @@
                                 amount: amount,
                                 student_id: student_id,
                             }, function (response) {
-
+                                $('#student-info-div').html(response.view);
                             })
                         }
                     });

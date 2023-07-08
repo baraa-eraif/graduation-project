@@ -19,8 +19,10 @@ Route::group(array('middleware' => ['auth:' . ADMINS_GUARD]), function () {
     Route::resourceRoutes('student', 'StudentController');
     Route::resourceRoutes('course', 'CourseController');
     Route::resourceRoutes('specialization', 'SpecializationController');
-    Route::resourceRoutes('semester', 'SemesterController');
-    Route::resourceRoutes('study-plan', 'StudyPlanController');
+//    Route::resourceRoutes('semester', 'SemesterController');
+    Route::resourceRoutes('study-plan', 'StudyPlanController',function (){
+        Route::post('accreditation','StudyPlanController@accreditation')->name('study-plan.accreditation');
+    });
     Route::resourceRoutes('blog', 'BlogController');
     Route::resourceRoutes('notification', 'NotificationController');
     Route::get('enroll-course-request', 'EnrollCourseRequestController@index')->name('enroll-course-request.index');

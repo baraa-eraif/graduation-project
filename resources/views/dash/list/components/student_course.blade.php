@@ -1,6 +1,6 @@
 @php
     $semester = current_semester();
-    $number_registration_course = auth()->user()->registrationCourses()->where('status','passed')->sum('course_data->hour_number') ?? 0;
+    $number_registration_course = auth()->user()->registrationCourses()->sum('course_data->hour_number') ?? 0;
 @endphp
 @if($semester)
     <div style="direction: rtl" class="d-flex flex-wrap gap-2 justify-content-between mb-8">

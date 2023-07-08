@@ -23,6 +23,7 @@ class Authenticate extends Middleware
                 return route('teacher.login-form');
             return route('login');
         }
+        dd(url()->current());
         return null;
     }
 }

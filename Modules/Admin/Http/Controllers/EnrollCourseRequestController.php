@@ -60,6 +60,7 @@ class EnrollCourseRequestController extends BaseController
                 'course_id' => $model->course_id,
                 'course_data' => $model->course_data,
                 'student_data' => $model->student_data,
+                'teacher_id' => $model->teacher_id
             ));
 
             (new StudentWallet())->setAmount(get($specialization, 'hour_price', 0))
@@ -68,15 +69,15 @@ class EnrollCourseRequestController extends BaseController
                 ->setTransactionType(StudentWallet::REGISTRATION_COURSE_TRANSACTION_TYPE)
                 ->execute();
 
-            $passed_hours = $student->registrationCourses()->where('status', 'passed')->sum('course_data->hour_number');
+            $passed_hours = $student->registrationCourses()->sum('course_data->hour_number');
             $student->update(array('enrolled_hours' => $passed_hours));
 
             DB::commit();
-            $course_name = get($model, 'course_data.course_ident');
+            $course_name = get($model, 'course_data.name');
             send_notification_for_models(trans('lang.accept_enroll_request_message', array('course_name' => $course_name)), $student);
 
         } catch (\Exception $exception) {
-            return redirect()->back()->withErrors($exception->getMessage());
+            return response()->json(array('status' => true, 'message' => 'حدث خطا ما'));
         }
         return response()->json(array('status' => true, 'message' => 'تم تحديث حالة الطلب'));
     }
