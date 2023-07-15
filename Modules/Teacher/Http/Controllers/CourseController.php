@@ -46,13 +46,15 @@ class CourseController extends BaseController
                 'recordsFiltered' => $query->paginate()->total(), 'recordsTotal' => $query->paginate(self::PAGINATE_PER_PAGE)->total() ?? 0
             ], 200,);
         }
-
-//        $this->setConfig(array_merge($this->config, array('showAction' => false)))->setCompact($course, array('columns_args' => array('id', 'course_name', 'course_ident', 'midterm_grade', 'final_term_grade', 'activities_grades',)));
+        $course->enabled_accreditation = $course->students()->where('teacher_id', auth()->id())
+            ->whereNull('accreditation_status')->exists();
         $compact = get_data_table_source(
             $course,
             array('id', 'student_name', 'student_ident', 'midterm_grade', 'final_term_grade', 'activities_grades'),
-            array('config' => array_merge(NO_ACTIONS_LIST, array('filter_inputs' => false,)), 'editable_input' => array('midterm_grade', 'final_term_grade', 'activities_grades'),
-                'appended_actions' => array('accreditation'))
+            array(
+                'config' => array_merge(NO_ACTIONS_LIST, array('filter_inputs' => false,
+                        'slot' => 'dash.list.components.teacher_courses')
+                ), 'editable_input' => array('midterm_grade', 'final_term_grade', 'activities_grades'))
         );
         return view($this->viewIndex, $compact, array(
             'endpoint' => current_route() . '?model=' . $model,));
@@ -88,12 +90,16 @@ class CourseController extends BaseController
 
     public function accreditation(Request $request)
     {
-        $model = StudentCourse::find($request->get('id'));
-        $course_name = get($model, 'course.name');
-        $grade = min($model->activities_grades + $model->final_term_grade + $model->midterm_grade, 100);
-        send_notification_for_models(trans('lang.accreditation_message', array('course_name' => $course_name, 'grade' => $grade)), $model->student ?? null);
-        $status = $grade > 60 ? 'passed' : 'fail';
-        $model->update(array('status' => $status));
+//        $model = StudentCourse::find($request->get('id'));
+        StudentCourse::where(array('course_id' => $request->get('id'), 'teacher_id' => auth()->id()))->get()->each(function ($model) {
+//            $course_name = get($model, 'course.name');
+//            $grade = min($model->activities_grades + $model->final_term_grade + $model->midterm_grade, 100);
+//            send_notification_for_models(trans('lang.accreditation_message', array('course_name' => $course_name, 'grade' => $grade)), $model->student ?? null);
+//            $status = $grade > 60 ? 'passed' : 'fail';
+//            'status' => $status,
+            $model->update(array('accreditation_status' => StudentCourse::TEACHER_ACCREDITATION));
+        });
+
         return response()->json(array('status' => true, 'message' => __("lang.updated_successfully")));
     }
 

@@ -1,9 +1,11 @@
+
 <script>
     "use strict";
     // window.onload = function () {
     //     $('#search').val('');
     // }
     // Class definition
+    let $appended_actions = <?php echo json_encode(array_values($appended_actions ?? [])) ?>;;
     var KTDatatablesServerSide = function () {
         // Shared variables
         var table;
@@ -29,6 +31,18 @@
                     url: '{{ $list_route }}',
                 },
                 columns: Object.values(columns_list),
+                drawCallback: function (settings) {
+                    // Handle the response data here
+                    var response = settings.json; // Access the response data
+
+                    if (response?.enabled_accreditation) {
+                        let btn = $(document).find('#admin_accreditation');
+
+                        let enabled_accreditation = response.enabled_accreditation;
+                        btn.attr('disabled', !enabled_accreditation);
+                        btn.attr('teacher_id', response?.teacher_id);
+                    }
+                },
                 columnDefs: [
                     {
                         targets: 0,
@@ -66,7 +80,7 @@
                         targets: columns_list.map(e => e.data).indexOf(<?php echo json_encode($value); ?>),
                         render: function (data, type, row) {
                             let options = '';
-                            $.each(row.teachers ?? [], function(index, object) {
+                            $.each(row.teachers ?? [], function (index, object) {
                                 options += `<option value="${object.id}" ${row.selected_teacher === object.id ? 'selected' : ''}>${object.name}</option>`
                             });
                             return `<select class="form-select form-select-solid"  ${row.selected_teacher ? 'disabled' : ''} id="select-${row.id}" data-control="select2" data-dropdown-parent="#kt_modal_1" data-placeholder="اختر" data-allow-clear="true">
@@ -103,11 +117,11 @@
                             let btnIsDisabled = '';
 
                             let teachers = {};
-                            $.each(row.teachers ?? [], function(index, object) {
+                            $.each(row.teachers ?? [], function (index, object) {
                                 teachers['name'] = object.name;
                                 teachers['id'] = object.id;
                             });
-                            teachers =  Object.values(teachers)
+                            teachers = Object.values(teachers)
                             switch (row.status) {
                                 case 'pending':
                                     btnClass = 'warning';
@@ -240,7 +254,6 @@
             const editButtons = document.querySelectorAll('[data-kt-docs-table-filter="edit_row"]');
             const showButtons = document.querySelectorAll('[data-kt-docs-table-filter="show_row"]');
             const restoreButtons = document.querySelectorAll('[data-kt-docs-table-filter="restore_row"]');
-
             @if($appended_actions)
             @foreach($appended_actions as $key => $action)
             @if($action != 'appointment')
@@ -260,15 +273,17 @@
                 // Delete button on click
                 d.addEventListener('click', function (e) {
                     e.preventDefault();
+
                     const parent = e.target.closest('tr');
                     const $_id = parent.querySelectorAll('td')[0].innerText;
                     let action = '{{$slug}}';
+
                     let html = '';
                     let data = $(this).data('teachers');
                     let teachers = data ? data.split(' ') : null;
-                    console.log('teachers',teachers)
                     let appended = {};
-                    if (action === 'enroll'){
+
+                    if (action === 'enroll') {
                         appended['selected_teacher'] = $(`#select-${$_id}`).val()
                     }
                     console.log('appendedappended', appended,)
@@ -280,6 +295,7 @@
                     function evaluationCourse() {
                         console.log('evaluationCourse', $_id)
                     }
+
                     @else
                     Swal.fire({
                         text: '{{trans("lang.message_$slug")}}',

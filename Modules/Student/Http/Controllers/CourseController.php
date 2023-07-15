@@ -5,6 +5,7 @@ namespace Modules\Student\Http\Controllers;
 use App\Models\Course;
 use App\Models\EnrollCourseRequest;
 use App\Models\StudentCourse;
+use App\Models\StudyPlan;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -42,7 +43,15 @@ class CourseController extends BaseController
     public function index()
     {
         if (request()->ajax()) {
-            $query = $this->getQuery();
+            $requestValue = get(explode(',', get(request()->get('search'), 'value')), 1, null);
+
+            $query = $this->getQuery()->where('semester_id',get(current_semester(),'id'));
+            if (isset($requestValue)){
+                $query->whereHas('studentRequest',function ($query) use($requestValue){
+                    $query->where('status',$requestValue);
+                });
+            }
+
             return response()->json(['data' => $this->resource::Collection($query->ordered()->get())->toArray(request()),
                 'recordsFiltered' => $query->paginate()->total(), 'recordsTotal' => $query->paginate(self::PAGINATE_PER_PAGE)->total() ?? 0], 200,);
         }

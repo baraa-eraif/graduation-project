@@ -12,7 +12,7 @@ class StudentCourse extends BaseModel
     use HasFactory, SoftDeletes;
 
     protected $fillable = array('student_id', 'course_id', 'midterm_grade', 'final_term_grade', 'activities_grades',
-        'course_data', 'student_data', 'other_details','status','semester_id','teacher_id');
+        'course_data', 'student_data', 'other_details','status','semester_id','teacher_id','accreditation_status');
 
     protected $casts = array('course_data' => 'array', 'student_data' => 'array', 'other_details' => 'array');
 
@@ -20,6 +20,9 @@ class StudentCourse extends BaseModel
     protected $columns = array(
         'course_name', 'course_ident', 'midterm_grade', 'final_term_grade', 'activities_grades',
     );
+
+    const TEACHER_ACCREDITATION = 'teacher_accreditation';
+    const ADMIN_ACCREDITATION = 'admin_accreditation';
 
     public function course()
     {

@@ -29,6 +29,9 @@ Route::group(array('middleware' => ['auth:' . ADMINS_GUARD]), function () {
     Route::post('enroll-course-request/accept', 'EnrollCourseRequestController@accept')->name('enroll-course-request.accept');
     Route::post('enroll-course-request/reject', 'EnrollCourseRequestController@reject')->name('enroll-course-request.reject');
 
+    Route::get('accreditation-grades', 'accreditationGradesController@index')->name('accreditation-grades.index');
+    Route::post('accreditation/grades', 'accreditationGradesController@accreditation');
+
 
     Route::get('student/financial/{id}', 'StudentController@financialInfo');
 

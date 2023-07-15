@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Models\StudyPlan;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -265,7 +266,8 @@ function get_user_data($col)
 
 function __genrateLabel($input): string
 {
-    return isset($input['input']) ? trans('lang.' . $input['label']) : trans('lang.' . $input['model']);
+    return trans('lang.' . get($input,'label',$input['model'] ?? null));
+//    return isset($input['label']) ? trans('lang.' . $input['label']) : trans('lang.' . $input['model']);
 }
 
 function genrate_time($time, $format)
@@ -400,7 +402,8 @@ function send_notification_for_models($text, $model)
 
 function current_semester()
 {
-    return \App\Models\Semester::where('start_date', '<', now())->where('end_date', '>', now())->first();
+    $studyPlan = StudyPlan::find(get(auth()->user(),'specialization_id'));
+    return \App\Models\Semester::where('start_date', '<', now())->where('end_date', '>', now())->where('study_plan_id',$studyPlan->id ?? null)->first();
 }
 
 function current_semester_hours_count($student)

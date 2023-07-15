@@ -24,7 +24,7 @@ class StudentCourseResource extends BaseResource
             'midterm_grade' => (double)$this->midterm_grade,
             'final_term_grade' => (double)$this->final_term_grade,
             'activities_grades' => (double)$this->activities_grades,
-            'enabled_accreditation' => is_null($this->status)
+            'enabled_accreditation' => is_null($this->status),
         );
     }
 

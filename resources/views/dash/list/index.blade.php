@@ -4,7 +4,8 @@
         $delete_route = get($config,'deleteGroupAction',true) ? (isset($trash) ? route(current_route().'.forceDelete') : route(current_route().'.delete-group')) : null;
         $list_route = $endpoint ?? (isset($trash) ? route(current_route().'.trash') : route(current_route().'.index'));
         $columns = $list_columns ?? $columns_args ?? $model->getColumns();
-        $filterInputs = $model->getFilterInput();
+        $config_filter_inputs = get($config,'filter_inputs');
+        $filterInputs = $config_filter_inputs && is_array($config_filter_inputs) ? $config_filter_inputs :  $model->getFilterInput();
     @endphp
     @if($model->getCards())
         @include('dash.custom.profitable')
@@ -21,27 +22,27 @@
                 {{--                                       class="form-control w-250px" placeholder="أدخل للبحث"/>--}}
                 {{--                d-flex flex-stack--}}
                 <div class="mb-10">
-                    @if($slot = get($config,'slot'))
-                        @include($slot)
-                    @endif
-                    <!--begin::Search-->
+                @if($slot = get($config,'slot'))
+                    @include($slot)
+                @endif
+                <!--begin::Search-->
                     <!--begin::Toolbar-->
                     <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
                         <!--begin::Filter-->
-                        {{--                        <button type="button" class="btn btn-light-success me-3" title="Exporting & Importing Sheets"--}}
-                        {{--                                data-bs-toggle="modal" data-bs-target="#kt_modal_upload">--}}
-                        {{--                            <span class="svg-icon svg-icon-2"><!--begin::Svg Icon | path: assets/media/icons/duotune/files/fil003.svg-->--}}
-                        {{--<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"--}}
-                        {{--                                                        viewBox="0 0 24 24" fill="none">--}}
-                        {{--<path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22Z" fill="black"/>--}}
-                        {{--<path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black"/>--}}
-                        {{--</svg></span>--}}
-                        {{--                                <!--end::Svg Icon--></span>--}}
-                        {{--                            إستيراد--}}
-                        {{--                        </button>--}}
-                        @include('dash.list.components.sheets')
+                    {{--                        <button type="button" class="btn btn-light-success me-3" title="Exporting & Importing Sheets"--}}
+                    {{--                                data-bs-toggle="modal" data-bs-target="#kt_modal_upload">--}}
+                    {{--                            <span class="svg-icon svg-icon-2"><!--begin::Svg Icon | path: assets/media/icons/duotune/files/fil003.svg-->--}}
+                    {{--<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"--}}
+                    {{--                                                        viewBox="0 0 24 24" fill="none">--}}
+                    {{--<path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22Z" fill="black"/>--}}
+                    {{--<path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black"/>--}}
+                    {{--</svg></span>--}}
+                    {{--                                <!--end::Svg Icon--></span>--}}
+                    {{--                            إستيراد--}}
+                    {{--                        </button>--}}
+                    @include('dash.list.components.sheets')
 
-                        <!--end::Filter-->
+                    <!--end::Filter-->
 
                         @if(get($config,'addBtn',true))
                             <a href="{{ route(current_route().'.create') }}"
@@ -69,7 +70,7 @@
                             {{--                                <!--end::Svg Icon--></span>--}}
                             {{--                                إضافة جديد--}}
                             {{--                            </a>--}}
-                            <!--end::Add customer-->
+                        <!--end::Add customer-->
                         @endif
                     </div>
                     <!--end::Toolbar-->
@@ -99,26 +100,26 @@
                                             @endphp
                                             @switch($input['type'])
                                                 @case('input')
-                                                    <div class="col-md-3">
-                                                        <label class="form-label">أدخل للبحث</label>
-                                                        <input class="form-control" type="text"
-                                                               id="{{ $input['model'] }}"
-                                                               data-kt-docs-table-filter="search" value=""
-                                                               placeholder="أدخل للبحث"/>
-                                                    </div>
-                                                    @break
+                                                <div class="col-md-3">
+                                                    <label class="form-label">أدخل للبحث</label>
+                                                    <input class="form-control" type="text"
+                                                           id="{{ $input['model'] }}"
+                                                           data-kt-docs-table-filter="search" value=""
+                                                           placeholder="أدخل للبحث"/>
+                                                </div>
+                                                @break
                                                 @case('date')
-                                                    <div class="col-md-3">
-                                                        <label class="form-label">{{ __genrateLabel($input) }}</label>
-                                                        @include('dash.form.components.date',['is_search' => true,'enableTime' => true,'dateFormat' => 'Y-m-d'])
-                                                    </div>
-                                                    @break
+                                                <div class="col-md-3">
+                                                    <label class="form-label">{{ __genrateLabel($input) }}</label>
+                                                    @include('dash.form.components.date',['is_search' => true,'enableTime' => true,'dateFormat' => 'Y-m-d'])
+                                                </div>
+                                                @break
                                                 @case('select')
-                                                    <div class="col-md-3">
-                                                        <label class="form-label">{{ __genrateLabel($input) }}</label>
-                                                        @include('dash.form.components.select',['is_search' => true])
-                                                    </div>
-                                                    @break
+                                                <div class="col-md-3">
+                                                    <label class="form-label">{{ __genrateLabel($input) }}</label>
+                                                    @include('dash.form.components.select',['is_search' => true])
+                                                </div>
+                                                @break
                                             @endswitch
                                         @endforeach
                                     @endif

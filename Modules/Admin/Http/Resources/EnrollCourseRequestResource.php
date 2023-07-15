@@ -17,7 +17,8 @@ class EnrollCourseRequestResource extends BaseResource
     {
         return array(
             'id' => $this->id,
-            'course_name' => get($this,'course_data.name'),'student_name' => get($this,'student_data.name')
+            'course_name' => get($this,'course_data.name'),
+            'student_name' => get($this,'student_data.name')
         );
     }
 
