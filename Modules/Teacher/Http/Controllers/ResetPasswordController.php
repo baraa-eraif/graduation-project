@@ -35,11 +35,11 @@ class ResetPasswordController extends Controller
         if (!$isOldPasswordCorrect)
             return response()->json(['status' => false, 'message' => 'عذراً كلمة المرور القديمة غير صحيحة']);
         $user->update(array(
-            'password' => $request->get('password')
+            'password' => Hash::make($request->get('password'))
         ));
 
-        Auth::login($user->refresh());
-        return response()->json(['status' => true, 'message' => 'تم تحديث كلمة المرور بنجاح']);
+        Auth::guard('teachers-auth')->logout();
+        return response()->json(['status' => true, 'message' => 'تم تحديث كلمة المرور بنجاح','route' => 'teacher']);
     }
 
 }

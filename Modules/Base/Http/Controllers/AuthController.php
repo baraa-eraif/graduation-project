@@ -5,7 +5,9 @@ namespace Modules\Base\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -103,13 +105,12 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $this->guard()->logout();
+        Auth::guard('teachers-auth')->logout();
 
-        $request->session()->invalidate();
+//        $request->session()->invalidate();
+//        $request->session()->regenerateToken();
 
-        $request->session()->regenerateToken();
-
-
-        return response()->json(array('status' => true));
+        return response()->json(array('status' => true
+        ,'route' => Arr::first(explode('.',current_route()))));
     }
 }

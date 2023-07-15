@@ -33,8 +33,8 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (\Throwable $e) {
-            dd($e);
-//            abort(500);
+//            dd($e);
+            abort(500);
         });
     }
 }

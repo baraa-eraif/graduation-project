@@ -2,15 +2,17 @@
 @section('content')
 
 
-    <div  dir="rtl" class="vg-page page-home" id="home" style="background-image: url('{{asset('landing/assets/img/cover1.jpg')}}')">
+    <div dir="rtl" class="vg-page page-home" id="home"
+         style="background-image: url('{{asset('landing/assets/img/cover1.jpg')}}')">
         <!-- Navbar -->
         <div dir="rtl" class="navbar navbar-expand-lg navbar-dark sticky" data-offset="500">
-            <div  dir="rtl" class="container">
+            <div dir="rtl" class="container">
                 <!--  <a href="" class="navbar-brand"> الجامعة الاسلامية-غزة</a>-->
-                <button dir="rtl" class="navbar-toggler" data-toggle="collapse" data-target="#main-navbar" aria-expanded="true">
+                <button dir="rtl" class="navbar-toggler" data-toggle="collapse" data-target="#main-navbar"
+                        aria-expanded="true">
                     <span dir="rtl" class="ti-menu"></span>
                 </button>
-                <div  dir="rtl" class="collapse navbar-collapse" id="main-navbar">
+                <div dir="rtl" class="collapse navbar-collapse" id="main-navbar">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
                             <a href="#home" class="nav-link" data-animate="scrolling">بوابة الخدمات</a>
@@ -31,28 +33,23 @@
         </div> <!-- End Navbar -->
         <!-- Caption header -->
         <div class="caption-header wow zoomInDown">
-
             <h1 class="fw-normal">أهلا بك في بوابة الخدمات</h1>
-
-
             <div class="button-container">
-                <button onclick="window.location.href='{{url('student/login')}}'" class="student-button">خدمات الطالب</button>
-                <button onclick="window.location.href='{{url('teacher/login')}}'" class="teacher-button">خدمات المدرس</button>
-                <button onclick="window.location.href='{{url('admin/login')}}'" class="manager-button">خدمات المدير</button>
-                <button onclick="window.location.href='https://cdi.iugaza.edu.ps/enrollment-application/'" class="apply-button">طلب الالتحاق</button>
+                <a href="{{url('student/login')}}" target="_blank" class="student-button">خدمات الطالب</a>
+                <a href="{{url('teacher/login')}}" target="_blank" class="teacher-button">خدمات المدرس</a>
+                <a href="{{url('admin/login')}}" target="_blank" class="manager-button">خدمات المدير</a>
+                <a href="https://cdi.iugaza.edu.ps/enrollment-application" class="apply-button">طلب الالتحاق</a>
             </div>
-
-
         </div>
 
     </div> <!-- End Caption header -->
-{{--    <div class="home-container">--}}
-{{--        <h2>مرحبًا بك في موقعنا!</h2>--}}
-{{--        <div class="button-group">--}}
-{{--            <a href="#" class="button">خدمات الطالب</a>--}}
-{{--            <a href="#" class="button">خدمات المدرس</a>--}}
-{{--            <a href="#" class="button">خدمات المدير</a>--}}
-{{--            <a href="#" class="button">طلب الالتحاق</a>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    {{--    <div class="home-container">--}}
+    {{--        <h2>مرحبًا بك في موقعنا!</h2>--}}
+    {{--        <div class="button-group">--}}
+    {{--            <a href="#" class="button">خدمات الطالب</a>--}}
+    {{--            <a href="#" class="button">خدمات المدرس</a>--}}
+    {{--            <a href="#" class="button">خدمات المدير</a>--}}
+    {{--            <a href="#" class="button">طلب الالتحاق</a>--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
 @endsection

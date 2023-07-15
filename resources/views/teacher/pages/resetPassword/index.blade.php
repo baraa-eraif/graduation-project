@@ -141,16 +141,18 @@
                                     });
                                     return;
                                 }
-                                Swal.fire({
-                                    text: response.message,
-                                    icon: "success",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "حسناً",
-                                    customClass: {
-                                        confirmButton: "btn fw-bold btn-primary",
-                                    }
-                                });
-                                form.reset();
+
+                                window.location.href = window.location.origin + `/${response.route}/login`;
+                                // Swal.fire({
+                                //     text: response.message,
+                                //     icon: "success",
+                                //     buttonsStyling: false,
+                                //     confirmButtonText: "حسناً",
+                                //     customClass: {
+                                //         confirmButton: "btn fw-bold btn-primary",
+                                //     }
+                                // });
+                                // form.reset();
                                 // ...
                             },
                             error: function (xhr, status, error) {
