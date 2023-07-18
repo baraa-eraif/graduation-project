@@ -45,7 +45,9 @@ class CourseController extends BaseController
         if (request()->ajax()) {
             $requestValue = get(explode(',', get(request()->get('search'), 'value')), 1, null);
 
-            $query = $this->getQuery()->where('semester_id',get(current_semester(),'id'));
+            $query = $this->getQuery()->whereHas('specializations',function ($query){
+                $query->where('id',get(auth()->user(),'specialization_id'));
+            })->where('semester_id',get(current_semester(),'id'));
             if (isset($requestValue)){
                 $query->whereHas('studentRequest',function ($query) use($requestValue){
                     $query->where('status',$requestValue);

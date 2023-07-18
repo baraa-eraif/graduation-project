@@ -20,10 +20,10 @@ class Course extends BaseModel
 //'university_requirement','specialty'
 
 
-//    public function specializations()
-//    {
-//        return $this->belongsToMany(Specialization::class, 'course_specializations', 'course_id', 'specialization_id', 'id', 'id');
-//    }
+    public function specializations()
+    {
+        return $this->belongsToMany(Specialization::class, 'course_specializations', 'course_id', 'specialization_id', 'id', 'id');
+    }
 
     public function students()
     {
@@ -69,6 +69,18 @@ class Course extends BaseModel
             'endpoint' => [
                 'option_value' => 'id',
                 'option_name' => 'title',
+                'model' => [
+                    'function' => 'semesterOptions'
+                ]
+            ],
+        ],
+        [
+            'type' => 'select',
+            'model' => 'specializations',
+            'multiple' => true,
+            'endpoint' => [
+                'option_value' => 'id',
+                'option_name' => 'name',
             ],
         ],
 //        [
@@ -162,4 +174,8 @@ class Course extends BaseModel
         return $query;
     }
 
+    public function semesterOptions()
+    {
+        return Semester::where('status','approved')->pluck('id', 'title');
+    }
 }

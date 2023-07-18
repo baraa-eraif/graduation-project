@@ -36,7 +36,7 @@ class CourseResource extends BaseResource
 
         return array_merge(parent::serializeForEdit($request), array(
             'teachers' => $this->teachers ? $this->teachers->pluck('id')->toArray() : [],
-//            'specializations' => $this->specializations ? $this->specializations->pluck('id')->toArray() : [],
+            'specializations' => $this->specializations ? $this->specializations->pluck('id')->toArray() : [],
         ));
     }
 }
