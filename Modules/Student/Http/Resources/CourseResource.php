@@ -26,7 +26,7 @@ class CourseResource extends BaseResource
             'study_year' => $this->study_year,
             'study_season' => $this->study_season,
             'course_type' => $this->course_type,
-            'semester_name' => optional($this->semester)->title,
+            'semester_name' => $this->semester_name,
             'status' => optional($studentRequest)->status,
             'status_text' => optional($studentRequest)->status ? trans("lang.".optional($studentRequest)->status.'_status') : null,
             'enabled_enroll' => optional($studentRequest)->status == 'rejected',

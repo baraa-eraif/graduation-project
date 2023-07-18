@@ -30,14 +30,14 @@ class Course extends BaseModel
         return $this->hasMany(StudentCourse::class, 'course_id');
     }
 
-    public function semester()
-    {
-        return $this->belongsTo(Semester::class, 'semester_id');
-    }
+//    public function semester()
+//    {
+//        return $this->belongsTo(Semester::class, 'semester_id');
+//    }
 
     public function studentRequest()
     {
-        return $this->hasOne(EnrollCourseRequest::class,'course_id')->where('student_id',auth()->id());
+        return $this->hasOne(EnrollCourseRequest::class, 'course_id')->where('student_id', auth()->id());
     }
 
     public function teachers()
@@ -65,12 +65,19 @@ class Course extends BaseModel
         ],
         [
             'type' => 'select',
-            'model' => 'semester_id',
+            'model' => 'semester_order',
+            'class' => 'col-md-6',
+            'hideSearch' => true,
+            'role' => [
+                'require' => true,
+            ],
             'endpoint' => [
                 'option_value' => 'id',
-                'option_name' => 'title',
+                'option_name' => 'name',
                 'model' => [
-                    'function' => 'semesterOptions'
+                    'الاول' => 1,
+                    'الثاني' => 2,
+                    'الثالث' => 3,
                 ]
             ],
         ],
@@ -176,6 +183,18 @@ class Course extends BaseModel
 
     public function semesterOptions()
     {
-        return Semester::where('status','approved')->pluck('id', 'title');
+        return Semester::where('status', 'approved')->pluck('id', 'title');
+    }
+
+    public function getSemesterNameAttribute()
+    {
+        switch ($this->semester_id){
+            case 1:
+               return 'الاول';
+            case 2:
+                return 'الثاني';
+            case 3:
+                return 'الثالث';
+        }
     }
 }

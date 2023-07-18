@@ -76,6 +76,7 @@ return array(
     'accreditation' => 'اعتماد الدرجات',
     'message_accreditation' => 'هل انت متاكد اعتماد الدرجات',
     'semester_id' => 'الفصل الدراسي',
+    'semester_order' => 'الفصل الدراسي',
     'search_semester_id' => 'الفصل الدراسي',
     'teacher.calendar' => 'التقويم',
     'transaction_type_text' => 'نوع الحركة',

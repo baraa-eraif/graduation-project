@@ -9,9 +9,9 @@ class Student extends BaseModel
     use HasFactory;
 
     protected $fillable = array(
-        'first_name','father_name','grandfather_name','family_name','date_of_birth','phone','high_school_gpa',
-        'address','gender','national_id','nationality','student_id', 'email', 'password', 'info','specialization_id', 'balance', 'gpa',
-        'profile_image','passed_hours','enrolled_hours'
+        'first_name', 'father_name', 'grandfather_name', 'family_name', 'date_of_birth', 'phone', 'high_school_gpa',
+        'address', 'gender', 'national_id', 'nationality', 'student_id', 'email', 'password', 'info', 'specialization_id', 'balance', 'gpa',
+        'profile_image', 'passed_hours', 'enrolled_hours'
     );
 
     protected $casts = array('info' => 'array');
@@ -23,6 +23,11 @@ class Student extends BaseModel
     public function getUserIdAttribute()
     {
         return $this->student_id;
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->first_name.' '.$this->father_name . ' '. $this->family_name;
     }
 
     public function specialization()

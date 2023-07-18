@@ -23,10 +23,10 @@ class CourseResource extends BaseResource
             'course_ident' => $this->course_ident,
             'number_of_hour' => $this->number_of_hour,
             'study_year' => $this->study_year,
-            'semester_id' => $this->semester_id,
+//            'semester_id' => $this->semester_id,
             'study_season' => $this->study_season,
             'course_type' => $this->course_type,
-            'semester_name' => optional($this->semester)->title
+            'semester_name' =>$this->semester_name
         );
     }
 

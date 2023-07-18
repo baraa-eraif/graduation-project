@@ -105,7 +105,7 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        Auth::guard('teachers-auth')->logout();
+        Auth::guard($this->guard)->logout();
 
 //        $request->session()->invalidate();
 //        $request->session()->regenerateToken();

@@ -69,7 +69,7 @@ class StudyPlan extends BaseModel
             $model->semesters()->saveMany(collect($array)->transform(function ($title, $index) {
                 return new Semester([
                     'title' => trans("lang.$title"),
-                    'ordered' => $index,
+                    'ordered' => $index + 1,
                     'status' => 'pending'
                 ]);
             }));
